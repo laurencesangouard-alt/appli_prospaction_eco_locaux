@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <td class="px-6 py-3">${escHtml(c.activite || c.activity || '—')}</td>
           <td class="px-6 py-3">${escHtml(c.ville || c.city || '—')}</td>
           <td class="px-6 py-3 text-sm">${escHtml(c.telephone || c.phone || '—')}</td>
+          <td class="px-6 py-3 text-sm">${escHtml(c.email || c['e-mail'] || '—')}</td>
           <td class="px-6 py-3">${(c.note_google || c.google_rating || c.rating) ? `<span class="rating-badge">★ ${parseFloat(c.note_google || c.google_rating || c.rating).toFixed(1)}</span>` : '—'}</td>
           <td class="px-6 py-3">
             <a href="fiche.html?id=${c.id}" class="cursor-pointer" style="text-decoration:none">
