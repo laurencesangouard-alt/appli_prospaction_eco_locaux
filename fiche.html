@@ -419,7 +419,7 @@ async function loadInteractions() {
           <div class="flex justify-between items-start">
             <p class="text-[10px] text-stone-400 font-bold uppercase tracking-wider">${i.type || 'Note'} · ${fmtDate(i.created_at)}</p>
           </div>
-          <p class="text-sm text-stone-800 mt-1 leading-relaxed">${escHtml(i.content || i.description || '')}</p>
+          <p class="text-sm text-stone-800 mt-1 leading-relaxed whitespace-pre-wrap">${escHtml(i.content || i.description || '')}</p>
         </div>
       </div>
     `}).join('');

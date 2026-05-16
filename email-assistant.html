@@ -280,11 +280,11 @@ document.getElementById('btn-send').addEventListener('click', async () => {
     console.log('📤 Tentative d\'envoi email :', { contactId: selectedContact.id, commercialId, subject });
     await API.sendEmail(selectedContact.id, commercialId, subject, body);
     
-    // 1. Créer la trace dans l'historique (interactions)
+    // 1. Créer la trace dans l'historique (interactions) avec le texte complet
     await SupabaseClient.insertInteraction(Auth.getToken(), {
       contact_id: selectedContact.id,
       type: 'email',
-      content: `Envoi d'une proposition par email : "${subject}"`
+      content: `OBJET : ${subject}\n\nCORPS :\n${body}`
     });
 
     // 2. Mettre à jour le statut du contact
