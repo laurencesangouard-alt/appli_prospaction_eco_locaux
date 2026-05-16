@@ -71,6 +71,47 @@ const Auth = (() => {
 
   // ── Page Login ────────────────────────────────────────────────
   function initLoginPage() {
+    // ── Interception du lien magique Supabase ──────────────────
+    // Supabase redirige vers index.html#access_token=...&type=magiclink
+    const hash = window.location.hash;
+    if (hash && hash.includes('access_token')) {
+      const params = new URLSearchParams(hash.substring(1));
+      const accessToken  = params.get('access_token');
+      const refreshToken = params.get('refresh_token');
+      const type         = params.get('type'); // 'magiclink', 'recovery', 'signup'
+
+      if (accessToken) {
+        // Nettoyer le hash de l'URL
+        history.replaceState(null, '', window.location.pathname);
+
+        // Récupérer l'utilisateur depuis Supabase et sauvegarder la session
+        SupabaseClient.getUser(accessToken).then(user => {
+          if (user) {
+            saveSession({ access_token: accessToken, refresh_token: refreshToken, user });
+            window.location.href = 'optimisation.html';
+          } else {
+            // Afficher un message d'erreur si le token est invalide
+            const alertBox = document.getElementById('auth-alert');
+            const alertMsg = document.getElementById('auth-alert-msg');
+            if (alertBox && alertMsg) {
+              alertBox.classList.remove('hidden', 'alert-success');
+              alertBox.classList.add('alert-error');
+              alertMsg.textContent = 'Lien expiré ou invalide. Demandez un nouveau lien magique.';
+            }
+          }
+        }).catch(() => {
+          const alertBox = document.getElementById('auth-alert');
+          const alertMsg = document.getElementById('auth-alert-msg');
+          if (alertBox && alertMsg) {
+            alertBox.classList.remove('hidden', 'alert-success');
+            alertBox.classList.add('alert-error');
+            alertMsg.textContent = 'Erreur lors de la vérification du lien. Réessayez.';
+          }
+        });
+        return; // Attendre la vérification du token, ne pas continuer
+      }
+    }
+
     // Si déjà connecté → dashboard
     if (getSession()?.access_token) {
       window.location.href = 'optimisation.html';

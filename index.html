@@ -246,7 +246,34 @@
       const clearSession = () => sessionStorage.removeItem(SESSION_KEY);
 
       function initLoginPage() {
+        // Interception lien magique Supabase (#access_token=...&type=magiclink)
+        const hash = window.location.hash;
+        if (hash && hash.includes('access_token')) {
+          const params = new URLSearchParams(hash.substring(1));
+          const accessToken  = params.get('access_token');
+          const refreshToken = params.get('refresh_token');
+          if (accessToken) {
+            history.replaceState(null, '', window.location.pathname);
+            SupabaseClient.getUser(accessToken).then(user => {
+              if (user) {
+                saveSession({ access_token: accessToken, refresh_token: refreshToken, user });
+                window.location.href = 'optimisation.html';
+              } else {
+                const alertBox = document.getElementById('auth-alert');
+                const alertMsg = document.getElementById('auth-alert-msg');
+                if (alertBox && alertMsg) {
+                  alertBox.classList.remove('hidden', 'alert-success');
+                  alertBox.classList.add('alert-error');
+                  alertMsg.textContent = 'Lien expiré ou invalide. Demandez un nouveau lien magique.';
+                }
+              }
+            });
+            return;
+          }
+        }
+
         if (getSession()?.access_token) { window.location.href = 'optimisation.html'; return; }
+
         const form = document.getElementById('login-form');
         const btnText = document.getElementById('login-btn-text');
         const spinner = document.getElementById('login-spinner');
