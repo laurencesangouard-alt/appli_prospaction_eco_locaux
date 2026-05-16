@@ -252,7 +252,7 @@ async function loadContacts(statusFilter='') {
   const userId = Auth.getUserId();
   document.getElementById('contacts-list').innerHTML = `<div class="skeleton h-28 w-full"></div><div class="skeleton h-28 w-full"></div><div class="skeleton h-28 w-full"></div>`;
   try {
-    let contacts = await SupabaseClient.getContacts(token, userId, statusFilter ? {statut: statusFilter} : {});
+    let contacts = await SupabaseClient.getContacts(token, userId, (statusFilter && statusFilter !== 'tous') ? {statut: statusFilter} : {});
     
     // Tri : "nouveau_lead" en premier, puis par date de création décroissante
     contacts.sort((a, b) => {
