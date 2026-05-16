@@ -3,8 +3,9 @@
  * Utilise l'API REST Supabase directement via fetch
  */
 const SupabaseClient = (() => {
-  // Détection mode test (token mock)
-  const isMockToken = (token) => token && (token.startsWith('mock-') || token === 'mock-token-test-mode');
+  // Mode test : token fictif (mock-*) ou clé anonyme Supabase
+  const isMockToken  = (token) => token && token.startsWith('mock-');
+  const isTestMode   = (token) => isMockToken(token) || token === CONFIG.SUPABASE_ANON;
 
   const url = () => CONFIG.SUPABASE_URL;
   const key = () => CONFIG.SUPABASE_ANON;
@@ -99,9 +100,9 @@ const SupabaseClient = (() => {
       const errData = await res.json().catch(() => ({}));
       console.error(`❌ Erreur Supabase HTTP ${res.status} sur ${table}:`, errData);
       if (res.status === 401) {
-        if (isMockToken(token)) {
-          // En mode test, on ignore les erreurs 401 et on retourne un tableau vide
-          console.warn('⚠️ Mode test : requête Supabase ignorée (token mock)');
+        if (isTestMode(token)) {
+          // En mode test, on ignore les erreurs 401 (pas de redirection)
+          console.warn('⚠️ Mode test : accès refusé (role anon), données vides');
           return [];
         }
         console.warn('⚠️ Session expirée ou invalide. Redirection vers login...');
@@ -190,9 +191,9 @@ const SupabaseClient = (() => {
   }
 
   async function getContacts(token, userId, filters = {}) {
-    // En mode test, retourner des contacts fictifs
+    // Uniquement pour les tokens totalement fictifs (mock-*) : données de démo
     if (isMockToken(token)) {
-      console.log('🧪 Mode test : contacts fictifs retournés');
+      console.log('🧪 Token mock détecté : données fictives');
       return [
         { id: 'mock-1', nom: 'Boulangerie Dupont', activite: 'Boulangerie', ville: 'Lyon', telephone: '04 78 00 00 01', note_google: 4.5, statut: 'nouveau_lead', date_relance: null },
         { id: 'mock-2', nom: 'Restaurant Le Provençal', activite: 'Restaurant', ville: 'Marseille', telephone: '04 91 00 00 02', note_google: 4.2, statut: 'nouveau_lead', date_relance: null },
@@ -200,6 +201,7 @@ const SupabaseClient = (() => {
       ];
     }
 
+    // Pour la clé anon (mode test) et les vrais tokens : requête Supabase réelle
     const f = {};
     const statusVal = filters.statut || filters.status;
     if (statusVal) f['statut'] = `eq.${statusVal}`;

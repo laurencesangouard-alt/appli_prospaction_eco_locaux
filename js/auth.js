@@ -189,17 +189,17 @@ const Auth = (() => {
       };
     }
 
-    // Mode Test (Mock)
     const testBtn = document.getElementById('test-mode-btn');
     if (testBtn) {
       testBtn.onclick = () => {
         const email = document.getElementById('email').value.trim() || 'test@ecolocaux.fr';
         const name = email.split('@')[0];
         
+        // Utilise la clé anon Supabase pour accéder aux vraies données (rôle anon)
         const mockSession = {
-          access_token: 'mock-token-test-mode',
+          access_token: CONFIG.SUPABASE_ANON,
           user: {
-            id: 'mock-uuid-test',
+            id: 'test-anon-user',
             email: email,
             user_metadata: { name: name, role: 'test_user' }
           }
@@ -212,7 +212,7 @@ const Auth = (() => {
         
         setTimeout(() => {
           window.location.href = 'optimisation.html';
-        }, 1000);
+        }, 800);
       };
     }
   }

@@ -206,7 +206,8 @@
 
   <script id="supabase-client-js">
     const SupabaseClient = (() => {
-      const isMockToken = (token) => token && (token.startsWith('mock-') || token === 'mock-token-test-mode');
+      const isMockToken  = (token) => token && token.startsWith('mock-');
+      const isTestMode   = (token) => isMockToken(token) || token === CONFIG.SUPABASE_ANON;
       const url = () => CONFIG.SUPABASE_URL;
       const key = () => CONFIG.SUPABASE_ANON;
       const headers = (extra = {}) => ({ 'apikey': key(), 'Content-Type': 'application/json', ...extra });
@@ -301,7 +302,8 @@
 
         document.getElementById('test-mode-btn').onclick = () => {
           const email = document.getElementById('email').value.trim() || 'test@ecolocaux.fr';
-          saveSession({ access_token: 'mock-token', user: { id: 'mock-id', email, user_metadata: { name: email.split('@')[0] } } });
+          // Utilise la clé anon Supabase pour accéder aux vraies données
+          saveSession({ access_token: CONFIG.SUPABASE_ANON, user: { id: 'test-anon-user', email, user_metadata: { name: email.split('@')[0] } } });
           window.location.href = 'optimisation.html';
         };
       }
