@@ -303,11 +303,33 @@ const urlId = new URLSearchParams(location.search).get('id');
 document.addEventListener('DOMContentLoaded', async () => {
   await loadContacts();
   if (urlId) {
-    selectContact(urlId);
-    // Petit délai pour laisser l'UI s'initialiser
-    setTimeout(() => {
-      document.getElementById('btn-generate').click();
-    }, 500);
+    // Essayer de trouver dans la liste chargée
+    selectedContact = allContacts.find(c => c.id == urlId);
+    
+    // Si non trouvé (ex: nouveau prospect), le charger directement
+    if (!selectedContact) {
+      try {
+        const token = Auth.getToken();
+        const results = await SupabaseClient.query(token, 'contacts', {
+          select: '*',
+          filters: { id: `eq.${urlId}` }
+        });
+        if (results && results.length > 0) {
+          selectedContact = results[0];
+          // L'ajouter à la liste pour les fonctions de filtre
+          allContacts.push(selectedContact);
+        }
+      } catch (e) {
+        console.error('Erreur chargement contact direct:', e);
+      }
+    }
+
+    if (selectedContact) {
+      selectContact(urlId);
+      setTimeout(() => {
+        document.getElementById('btn-generate').click();
+      }, 500);
+    }
   }
 });
 </script>
