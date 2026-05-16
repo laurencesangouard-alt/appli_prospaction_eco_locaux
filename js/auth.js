@@ -84,7 +84,35 @@ const Auth = (() => {
         // Nettoyer le hash de l'URL
         history.replaceState(null, '', window.location.pathname);
 
-        // Récupérer l'utilisateur depuis Supabase et sauvegarder la session
+        if (type === 'recovery') {
+          // Mode réinitialisation de mot de passe
+          const form = document.getElementById('login-form');
+          const title = document.querySelector('h1');
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const emailGroup = document.getElementById('email').closest('.space-y-2');
+          
+          if (title) title.textContent = 'Nouveau mot de passe';
+          if (emailGroup) emailGroup.classList.add('hidden');
+          if (submitBtn) submitBtn.querySelector('#login-btn-text').textContent = 'Mettre à jour le mot de passe';
+          
+          // Changer l'action du formulaire
+          form.onsubmit = async (e) => {
+            e.preventDefault();
+            const newPassword = document.getElementById('password').value;
+            try {
+              const success = await SupabaseClient.updatePassword(accessToken, newPassword);
+              if (success) {
+                alert('Mot de passe mis à jour ! Connectez-vous avec votre nouveau mot de passe.');
+                window.location.reload();
+              }
+            } catch (err) {
+              alert('Erreur : ' + err.message);
+            }
+          };
+          return;
+        }
+
+        // Mode Magic Link (existant)
         SupabaseClient.getUser(accessToken).then(user => {
           if (user) {
             saveSession({ access_token: accessToken, refresh_token: refreshToken, user });

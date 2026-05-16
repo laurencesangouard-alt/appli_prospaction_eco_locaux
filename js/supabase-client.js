@@ -66,6 +66,32 @@ const SupabaseClient = (() => {
     return true;
   }
 
+  async function resetPasswordForEmail(email) {
+    const res = await fetch(`${url()}/auth/v1/recover`, {
+      method: 'POST',
+      headers: headers(),
+      body: JSON.stringify({ email }),
+    });
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.message || 'Erreur lors de l\'envoi de l\'email de récupération');
+    }
+    return true;
+  }
+
+  async function updatePassword(token, new_password) {
+    const res = await fetch(`${url()}/auth/v1/user`, {
+      method: 'PUT',
+      headers: headers({ 'Authorization': `Bearer ${token}` }),
+      body: JSON.stringify({ password: new_password }),
+    });
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.message || 'Erreur lors de la mise à jour du mot de passe');
+    }
+    return true;
+  }
+
   async function getUser(token) {
     const res = await fetch(`${url()}/auth/v1/user`, {
       headers: authHeaders(token),
@@ -233,7 +259,7 @@ const SupabaseClient = (() => {
   }
 
   return {
-    signIn, signOut, resetPasswordForEmail, signInWithOtp, getUser,
+    signIn, signOut, resetPasswordForEmail, updatePassword, signInWithOtp, getUser,
     query, insert, update, upsert,
     getActivities, getContacts,
     updateContactStatus, insertInteraction,

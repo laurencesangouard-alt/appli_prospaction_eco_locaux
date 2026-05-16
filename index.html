@@ -246,14 +246,51 @@
       const clearSession = () => sessionStorage.removeItem(SESSION_KEY);
 
       function initLoginPage() {
-        // Interception lien magique Supabase (#access_token=...&type=magiclink)
+        // Interception lien magique / récupération Supabase (#access_token=...&type=magiclink|recovery)
         const hash = window.location.hash;
         if (hash && hash.includes('access_token')) {
           const params = new URLSearchParams(hash.substring(1));
           const accessToken  = params.get('access_token');
           const refreshToken = params.get('refresh_token');
+          const type         = params.get('type');
+
           if (accessToken) {
             history.replaceState(null, '', window.location.pathname);
+
+            if (type === 'recovery') {
+              // Mode réinitialisation de mot de passe
+              const form = document.getElementById('login-form');
+              const title = document.querySelector('h1');
+              const submitBtn = form.querySelector('button[type="submit"]');
+              const emailGroup = document.getElementById('email').closest('.space-y-2');
+              
+              if (title) title.textContent = 'Nouveau mot de passe';
+              if (emailGroup) emailGroup.classList.add('hidden');
+              if (submitBtn) submitBtn.querySelector('#login-btn-text').textContent = 'Mettre à jour le mot de passe';
+              
+              form.onsubmit = async (e) => {
+                e.preventDefault();
+                const newPassword = document.getElementById('password').value;
+                try {
+                  const res = await fetch(`${CONFIG.SUPABASE_URL}/auth/v1/user`, {
+                    method: 'PUT',
+                    headers: { 'apikey': CONFIG.SUPABASE_ANON, 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: newPassword }),
+                  });
+                  if (res.ok) {
+                    alert('Mot de passe mis à jour ! Connectez-vous avec votre nouveau mot de passe.');
+                    window.location.reload();
+                  } else {
+                    const data = await res.json();
+                    alert('Erreur : ' + data.message);
+                  }
+                } catch (err) {
+                  alert('Erreur réseau : ' + err.message);
+                }
+              };
+              return;
+            }
+
             SupabaseClient.getUser(accessToken).then(user => {
               if (user) {
                 saveSession({ access_token: accessToken, refresh_token: refreshToken, user });
