@@ -279,8 +279,19 @@ document.getElementById('btn-send').addEventListener('click', async () => {
   try {
     console.log('📤 Tentative d\'envoi email :', { contactId: selectedContact.id, commercialId, subject });
     await API.sendEmail(selectedContact.id, commercialId, subject, body);
+    
+    // 1. Créer la trace dans l'historique (interactions)
+    await SupabaseClient.insertInteraction(Auth.getToken(), {
+      contact_id: selectedContact.id,
+      type: 'email',
+      content: `Envoi d'une proposition par email : "${subject}"`,
+      commercial_id: Auth.getUserId()
+    });
+
+    // 2. Mettre à jour le statut du contact
     await SupabaseClient.updateContactStatus(Auth.getToken(), selectedContact.id, 'email_envoye', {date_relance: workingDaysFromNow(CONFIG.RELANCE_DAYS)});
-    showToast('Email envoyé avec succès !', 'success');
+    
+    showToast('Email envoyé et archivé dans l\'historique !', 'success');
     document.getElementById('email-editor').classList.add('hidden');
     document.getElementById('selected-section').classList.add('hidden');
     document.getElementById('empty-state').classList.remove('hidden');

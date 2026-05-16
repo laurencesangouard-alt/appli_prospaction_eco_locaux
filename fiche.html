@@ -402,15 +402,27 @@ async function loadInteractions() {
     });
     const list = document.getElementById('interactions-list');
     if (!rows.length) { list.innerHTML = '<p class="text-stone-400 text-sm text-center py-4">Aucune interaction enregistrée.</p>'; return; }
-    list.innerHTML = rows.map(i => `
-      <div class="flex gap-3 pb-4 border-b border-stone-100 last:border-0">
-        <div class="w-2 h-2 rounded-full bg-primary mt-2 shrink-0"></div>
-        <div>
-          <p class="text-xs text-stone-400 font-medium">${fmtDate(i.created_at)} · ${i.type||'Note'}</p>
-          <p class="text-sm text-on-surface mt-0.5">${escHtml(i.content)}</p>
+    list.innerHTML = rows.map(i => {
+      let icon = 'description';
+      let iconColor = 'bg-stone-100 text-stone-500';
+      if (i.type === 'email') { icon = 'mail'; iconColor = 'bg-green-50 text-green-600'; }
+      if (i.type === 'rdv') { icon = 'event'; iconColor = 'bg-primary/10 text-primary'; }
+      if (i.type === 'relance') { icon = 'history_toggle_off'; iconColor = 'bg-amber-50 text-amber-600'; }
+      if (i.type === 'note') { icon = 'edit_note'; iconColor = 'bg-blue-50 text-blue-600'; }
+
+      return `
+      <div class="flex gap-4 pb-4 border-b border-stone-100 last:border-0">
+        <div class="w-10 h-10 rounded-xl ${iconColor} flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-xl">${icon}</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex justify-between items-start">
+            <p class="text-[10px] text-stone-400 font-bold uppercase tracking-wider">${i.type || 'Note'} · ${fmtDate(i.created_at)}</p>
+          </div>
+          <p class="text-sm text-stone-800 mt-1 leading-relaxed">${escHtml(i.content || i.description || '')}</p>
         </div>
       </div>
-    `).join('');
+    `}).join('');
   } catch(e) {}
 }
 
