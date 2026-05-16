@@ -188,8 +188,127 @@
     </div>
   </main>
 
-  <script src="js/config.js"></script>
-  <script src="js/supabase-client.js"></script>
-  <script src="js/auth.js"></script>
+  <!-- Inlined scripts to fix Vercel deployment issues -->
+  <script id="config-js">
+    const CONFIG = {
+      SUPABASE_URL: 'https://cocvueemnrmwrironirb.supabase.co',
+      SUPABASE_ANON: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNvY3Z1ZWVtbnJtd3Jpcm9uaXJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNTkzMzEsImV4cCI6MjA5MTczNTMzMX0.LH7mfHbq5RXQI7mOA08gppdDNxG_3sMSwO7y_8E34io',
+      N8N_BASE: 'https://lsangouard.app.n8n.cloud',
+      WEBHOOK_SEARCH: '/webhook/recherche_leads_v2',
+      WEBHOOK_ENRICH: '/webhook/enrich-contact',
+      WEBHOOK_EMAIL: '/webhook/generer_email',
+      WEBHOOK_SEND: '/webhook/send-email-contact',
+      MAX_LEADS: 5,
+      RELANCE_DAYS: 5,
+      ACTIVITIES_FALLBACK: ['Restaurant','Hôtel','Boulangerie','Salon de coiffure','Garage automobile','Cabinet médical','Pharmacie','Supermarché','Bar / Café','Épicerie','Fleuriste','Librairie','Agence immobilière','Bureau d\'avocats','Cabinet comptable','Centre sportif','École privée','Crèche','Artisan bâtiment','Plombier','Électricien','Peintre','Menuisier','Couvreur','Charpentier','Maçon'],
+    };
+  </script>
+
+  <script id="supabase-client-js">
+    const SupabaseClient = (() => {
+      const url = () => CONFIG.SUPABASE_URL;
+      const key = () => CONFIG.SUPABASE_ANON;
+      const headers = (extra = {}) => ({ 'apikey': key(), 'Content-Type': 'application/json', ...extra });
+      const authHeaders = (token, extra = {}) => ({ ...headers(extra), 'Authorization': `Bearer ${token}` });
+
+      async function signIn(email, password) {
+        const res = await fetch(`${url()}/auth/v1/token?grant_type=password`, { method: 'POST', headers: headers(), body: JSON.stringify({ email, password }) });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error_description || data.message || 'Erreur de connexion');
+        return data;
+      }
+      async function signOut(token) { await fetch(`${url()}/auth/v1/logout`, { method: 'POST', headers: authHeaders(token) }); }
+      async function resetPasswordForEmail(email) {
+        const res = await fetch(`${url()}/auth/v1/recover`, { method: 'POST', headers: headers(), body: JSON.stringify({ email }) });
+        if (!res.ok) { const data = await res.json(); throw new Error(data.message || 'Erreur récupération'); }
+        return true;
+      }
+      async function signInWithOtp(email) {
+        const res = await fetch(`${url()}/auth/v1/otp`, { method: 'POST', headers: headers(), body: JSON.stringify({ email, create_user: false }) });
+        if (!res.ok) { const data = await res.json(); throw new Error(data.message || 'Erreur OTP'); }
+        return true;
+      }
+      async function getUser(token) {
+        const res = await fetch(`${url()}/auth/v1/user`, { headers: authHeaders(token) });
+        return res.ok ? res.json() : null;
+      }
+      return { signIn, signOut, resetPasswordForEmail, signInWithOtp, getUser };
+    })();
+  </script>
+
+  <script id="auth-js">
+    const Auth = (() => {
+      const SESSION_KEY = 'prosp_session';
+      const saveSession = s => sessionStorage.setItem(SESSION_KEY, JSON.stringify(s));
+      const getSession = () => { try { return JSON.parse(sessionStorage.getItem(SESSION_KEY)); } catch { return null; } };
+      const clearSession = () => sessionStorage.removeItem(SESSION_KEY);
+
+      function initLoginPage() {
+        if (getSession()?.access_token) { window.location.href = 'optimisation.html'; return; }
+        const form = document.getElementById('login-form');
+        const btnText = document.getElementById('login-btn-text');
+        const spinner = document.getElementById('login-spinner');
+        const alertBox = document.getElementById('auth-alert');
+        const alertMsg = document.getElementById('auth-alert-msg');
+        const pwdInput = document.getElementById('password');
+
+        const showError = m => {
+          alertBox.classList.remove('hidden', 'alert-success', 'bg-green-100', 'text-green-800');
+          alertBox.classList.add('alert-error');
+          alertMsg.textContent = m;
+          const icon = alertBox.querySelector('.material-symbols-outlined');
+          if (icon) icon.textContent = 'error';
+        };
+
+        form.addEventListener('submit', async e => {
+          e.preventDefault();
+          const email = document.getElementById('email').value.trim();
+          const password = pwdInput.value;
+          if (!email || !password) return showError('Veuillez remplir tous les champs.');
+          btnText.textContent = 'Connexion…'; spinner.classList.remove('hidden');
+          try {
+            const session = await SupabaseClient.signIn(email, password);
+            saveSession(session); window.location.href = 'optimisation.html';
+          } catch (err) {
+            showError(err.message || 'Identifiants incorrects.');
+            btnText.textContent = 'Se connecter'; spinner.classList.add('hidden');
+          }
+        });
+
+        document.getElementById('forgot-password').onclick = async e => {
+          e.preventDefault();
+          const email = document.getElementById('email').value.trim();
+          if (!email) return showError('Saisissez votre e-mail.');
+          if (!confirm(`Envoyer un lien de récupération à ${email} ?`)) return;
+          try {
+            await SupabaseClient.resetPasswordForEmail(email);
+            alertBox.classList.remove('hidden', 'alert-error'); alertBox.classList.add('alert-success', 'bg-green-100', 'text-green-800');
+            alertMsg.textContent = 'Lien envoyé par e-mail !';
+            const icon = alertBox.querySelector('.material-symbols-outlined'); if (icon) icon.textContent = 'check_circle';
+          } catch (err) { showError(err.message); }
+        };
+
+        document.getElementById('magic-link-btn').onclick = async () => {
+          const email = document.getElementById('email').value.trim();
+          if (!email) return showError('Saisissez votre e-mail.');
+          try {
+            await SupabaseClient.signInWithOtp(email);
+            alertBox.classList.remove('hidden', 'alert-error'); alertBox.classList.add('alert-success', 'bg-green-100', 'text-green-800');
+            alertMsg.textContent = 'Lien magique envoyé !';
+          } catch (err) { showError(err.message); }
+        };
+
+        document.getElementById('test-mode-btn').onclick = () => {
+          const email = document.getElementById('email').value.trim() || 'test@ecolocaux.fr';
+          saveSession({ access_token: 'mock-token', user: { id: 'mock-id', email, user_metadata: { name: email.split('@')[0] } } });
+          window.location.href = 'optimisation.html';
+        };
+      }
+      return { initLoginPage };
+    })();
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.body.classList.contains('login-page')) Auth.initLoginPage();
+    });
+  </script>
 </body>
 </html>
