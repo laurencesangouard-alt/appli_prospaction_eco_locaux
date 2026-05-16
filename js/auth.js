@@ -127,7 +127,7 @@ const Auth = (() => {
     // Mot de passe oublié
     const forgotLink = document.getElementById('forgot-password');
     if (forgotLink) {
-      forgotLink.addEventListener('click', async (e) => {
+      forgotLink.onclick = async (e) => {
         e.preventDefault();
         const email = document.getElementById('email').value.trim();
         if (!email) {
@@ -155,7 +155,65 @@ const Auth = (() => {
           btnText.textContent = 'Se connecter';
           spinner.classList.add('hidden');
         }
-      });
+      };
+    }
+
+    // Lien magique (OTP)
+    const magicBtn = document.getElementById('magic-link-btn');
+    if (magicBtn) {
+      magicBtn.onclick = async () => {
+        const email = document.getElementById('email').value.trim();
+        if (!email) {
+          showError('Saisissez votre e-mail pour recevoir un lien magique.');
+          document.getElementById('email').focus();
+          return;
+        }
+
+        magicBtn.disabled = true;
+        magicBtn.textContent = 'Envoi…';
+        alertBox.classList.add('hidden');
+
+        try {
+          await SupabaseClient.signInWithOtp(email);
+          alertBox.classList.remove('hidden', 'alert-error');
+          alertBox.classList.add('alert-success', 'bg-green-100', 'text-green-800');
+          alertMsg.textContent = 'Un lien de connexion a été envoyé par e-mail !';
+          const icon = alertBox.querySelector('.material-symbols-outlined');
+          if (icon) icon.textContent = 'magic_button';
+        } catch (err) {
+          showError(err.message || 'Erreur lors de l\'envoi du lien magique.');
+        } finally {
+          magicBtn.disabled = false;
+          magicBtn.innerHTML = '<span class="material-symbols-outlined text-lg">magic_button</span> Lien magique';
+        }
+      };
+    }
+
+    // Mode Test (Mock)
+    const testBtn = document.getElementById('test-mode-btn');
+    if (testBtn) {
+      testBtn.onclick = () => {
+        const email = document.getElementById('email').value.trim() || 'test@ecolocaux.fr';
+        const name = email.split('@')[0];
+        
+        const mockSession = {
+          access_token: 'mock-token-test-mode',
+          user: {
+            id: 'mock-uuid-test',
+            email: email,
+            user_metadata: { name: name, role: 'test_user' }
+          }
+        };
+        
+        saveSession(mockSession);
+        alertBox.classList.remove('hidden', 'alert-error');
+        alertBox.classList.add('alert-success', 'bg-blue-100', 'text-blue-800');
+        alertMsg.textContent = 'Connexion mode test réussie ! Redirection...';
+        
+        setTimeout(() => {
+          window.location.href = 'optimisation.html';
+        }, 1000);
+      };
     }
   }
 

@@ -49,6 +49,19 @@ const SupabaseClient = (() => {
     return true;
   }
 
+  async function signInWithOtp(email) {
+    const res = await fetch(`${url()}/auth/v1/otp`, {
+      method: 'POST',
+      headers: headers(),
+      body: JSON.stringify({ email, create_user: false }),
+    });
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.message || 'Erreur lors de l\'envoi du lien');
+    }
+    return true;
+  }
+
   async function getUser(token) {
     const res = await fetch(`${url()}/auth/v1/user`, {
       headers: authHeaders(token),
@@ -200,7 +213,7 @@ const SupabaseClient = (() => {
   }
 
   return {
-    signIn, signOut, resetPasswordForEmail, getUser,
+    signIn, signOut, resetPasswordForEmail, signInWithOtp, getUser,
     query, insert, update, upsert,
     getActivities, getContacts,
     updateContactStatus, insertInteraction,
