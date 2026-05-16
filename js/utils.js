@@ -32,6 +32,8 @@ const STATUT_DB = {
   RDV_PLANIFIE:  'rdv_planifie',
   CLIENT:        'client',
   EN_ATTENTE:    'en_attente',
+  PERDU:         'perdu',
+  NE_PAS_RELANCER: 'ne_pas_relancer',
 };
 
 const STATUT_LABELS = {
@@ -41,6 +43,8 @@ const STATUT_LABELS = {
   'rdv_planifie':  'RDV planifié',
   'client':        'Client',
   'en_attente':    'En attente',
+  'perdu':         'Perdu',
+  'ne_pas_relancer': 'Ne pas relancer',
 };
 
 // ── Status chip ────────────────────────────────────────────────
@@ -52,6 +56,8 @@ function statusChip(status) {
     'rdv_planifie':  'rdv',
     'client':        'client',
     'en_attente':    'attente',
+    'perdu':         'perdu',
+    'ne_pas_relancer': 'perdu',
   };
   const cls   = cssMap[status] || 'nouveau';
   const label = STATUT_LABELS[status] || status || 'À trier';
