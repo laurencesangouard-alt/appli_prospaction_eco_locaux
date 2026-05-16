@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     { id: 'nouveau_lead', label: 'Nouveau lead', accent: 'accent-nouveau' },
     { id: 'a_relancer',   label: 'À relancer',   accent: 'accent-relancer' },
     { id: 'rdv_planifie', label: 'RDV planifié', accent: 'accent-rdv' },
+    { id: 'en_attente',   label: 'En attente',   accent: 'accent-attente' },
   ];
 
   let allContacts    = [];
@@ -176,6 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('stat-total').textContent   = allContacts.length;
     document.getElementById('stat-clients').textContent = allContacts.filter(c => (c.statut || c.status) === 'client').length;
     document.getElementById('stat-rdv').textContent     = allContacts.filter(c => (c.statut || c.status) === 'rdv_planifie').length;
+    document.getElementById('stat-attente').textContent = allContacts.filter(c => (c.statut || c.status) === 'en_attente').length;
   }
 
   // ── Drag & Drop ───────────────────────────────────────────────
