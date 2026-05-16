@@ -284,8 +284,7 @@ document.getElementById('btn-send').addEventListener('click', async () => {
     await SupabaseClient.insertInteraction(Auth.getToken(), {
       contact_id: selectedContact.id,
       type: 'email',
-      content: `Envoi d'une proposition par email : "${subject}"`,
-      commercial_id: Auth.getUserId()
+      content: `Envoi d'une proposition par email : "${subject}"`
     });
 
     // 2. Mettre à jour le statut du contact
