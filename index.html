@@ -206,6 +206,7 @@
 
   <script id="supabase-client-js">
     const SupabaseClient = (() => {
+      const isMockToken = (token) => token && (token.startsWith('mock-') || token === 'mock-token-test-mode');
       const url = () => CONFIG.SUPABASE_URL;
       const key = () => CONFIG.SUPABASE_ANON;
       const headers = (extra = {}) => ({ 'apikey': key(), 'Content-Type': 'application/json', ...extra });
