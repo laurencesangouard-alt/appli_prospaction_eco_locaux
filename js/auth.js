@@ -94,9 +94,11 @@ const Auth = (() => {
     }
 
     function showError(msg) {
-      alertBox.classList.remove('hidden', 'alert-success');
+      alertBox.classList.remove('hidden', 'alert-success', 'bg-green-100', 'text-green-800');
       alertBox.classList.add('alert-error');
       alertMsg.textContent = msg;
+      const icon = alertBox.querySelector('.material-symbols-outlined');
+      if (icon) icon.textContent = 'error';
     }
 
     form.addEventListener('submit', async (e) => {
@@ -121,6 +123,40 @@ const Auth = (() => {
         form.querySelector('button[type=submit]').disabled = false;
       }
     });
+
+    // Mot de passe oublié
+    const forgotLink = document.getElementById('forgot-password');
+    if (forgotLink) {
+      forgotLink.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value.trim();
+        if (!email) {
+          showError('Veuillez saisir votre adresse e-mail pour réinitialiser votre mot de passe.');
+          document.getElementById('email').focus();
+          return;
+        }
+
+        if (!confirm(`Envoyer un lien de réinitialisation de mot de passe à ${email} ?`)) return;
+
+        btnText.textContent = 'Envoi…';
+        spinner.classList.remove('hidden');
+        alertBox.classList.add('hidden');
+
+        try {
+          await SupabaseClient.resetPasswordForEmail(email);
+          alertBox.classList.remove('hidden', 'alert-error');
+          alertBox.classList.add('alert-success', 'bg-green-100', 'text-green-800');
+          alertMsg.textContent = 'Un lien de réinitialisation a été envoyé à votre adresse e-mail.';
+          const icon = alertBox.querySelector('.material-symbols-outlined');
+          if (icon) icon.textContent = 'check_circle';
+        } catch (err) {
+          showError(err.message || 'Une erreur est survenue.');
+        } finally {
+          btnText.textContent = 'Se connecter';
+          spinner.classList.add('hidden');
+        }
+      });
+    }
   }
 
   return { saveSession, getSession, clearSession, getToken, getUser, getUserId, getUserMeta, requireAuth, initLoginPage };

@@ -36,6 +36,19 @@ const SupabaseClient = (() => {
     });
   }
 
+  async function resetPasswordForEmail(email) {
+    const res = await fetch(`${url()}/auth/v1/recover`, {
+      method: 'POST',
+      headers: headers(),
+      body: JSON.stringify({ email }),
+    });
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.message || 'Erreur lors de la demande de récupération');
+    }
+    return true;
+  }
+
   async function getUser(token) {
     const res = await fetch(`${url()}/auth/v1/user`, {
       headers: authHeaders(token),
@@ -187,7 +200,7 @@ const SupabaseClient = (() => {
   }
 
   return {
-    signIn, signOut, getUser,
+    signIn, signOut, resetPasswordForEmail, getUser,
     query, insert, update, upsert,
     getActivities, getContacts,
     updateContactStatus, insertInteraction,
