@@ -57,7 +57,7 @@ const SupabaseClient = (() => {
     const res = await fetch(`${url()}/auth/v1/otp`, {
       method: 'POST',
       headers: headers(),
-      body: JSON.stringify({ email, create_user: false }),
+      body: JSON.stringify({ email, create_user: true }),
     });
     if (!res.ok) {
       const data = await res.json();
