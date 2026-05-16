@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       const id = isSearchMode ? idx : c.id;
       const isSelected = isSearchMode ? selectedIndices.has(idx) : selectedIds.has(c.id);
       const isPast = isOverdue(c.date_relance);
-      const relanceStyle = isPast ? 'style="color:#D32F2F;font-weight:bold"' : '';
       return `
         <tr class="${isSelected ? 'bg-primary/5' : ''}">
           <td class="px-6 py-3">
@@ -88,8 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <td class="px-6 py-3">${escHtml(c.activite || c.activity || '—')}</td>
           <td class="px-6 py-3">${escHtml(c.ville || c.city || '—')}</td>
           <td class="px-6 py-3 text-sm">${escHtml(c.telephone || c.phone || '—')}</td>
-          <td class="px-6 py-3 text-sm" ${relanceStyle}>${c.date_relance ? fmtDate(c.date_relance) : '—'}</td>
-          <td class="px-6 py-3">${(c.note_google || c.rating) ? `<span class="rating-badge">★ ${parseFloat(c.note_google || c.rating).toFixed(1)}</span>` : '—'}</td>
+          <td class="px-6 py-3">${(c.note_google || c.google_rating || c.rating) ? `<span class="rating-badge">★ ${parseFloat(c.note_google || c.google_rating || c.rating).toFixed(1)}</span>` : '—'}</td>
           <td class="px-6 py-3">
             <a href="fiche.html?id=${c.id}" class="cursor-pointer" style="text-decoration:none">
               ${statusChip(c.statut || c.status || (isSearchMode ? 'À trier' : 'Nouveau lead'))}

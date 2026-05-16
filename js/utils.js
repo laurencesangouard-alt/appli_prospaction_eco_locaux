@@ -57,7 +57,7 @@ function statusChip(status) {
     'client':        'client',
     'en_attente':    'attente',
     'perdu':         'perdu',
-    'ne_pas_relancer': 'perdu',
+    'ne_pas_relancer': 'ne_pas_relancer',
   };
   const cls   = cssMap[status] || 'nouveau';
   const label = STATUT_LABELS[status] || status || 'À trier';

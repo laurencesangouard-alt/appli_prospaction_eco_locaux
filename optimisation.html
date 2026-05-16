@@ -31,6 +31,18 @@
     </script>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/dashboard.css">
+    <style>
+      /* Chips statut — définis après Tailwind pour avoir précédence */
+      .chip { display:inline-flex;align-items:center;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:700;white-space:nowrap; }
+      .chip-nouveau    { background:#e8f4e0!important; color:#6BA43A!important; }
+      .chip-email      { background:#dbeafe!important; color:#1d4ed8!important; }
+      .chip-relancer   { background:#fef3c7!important; color:#92400e!important; }
+      .chip-rdv        { background:#d1fae5!important; color:#065f46!important; }
+      .chip-client     { background:#a6f875!important; color:#1d4a00!important; }
+      .chip-attente    { background:#f1f5f9!important; color:#475569!important; }
+      .chip-perdu      { background:#fee2e2!important; color:#991b1b!important; }
+      .chip-ne_pas_relancer { background:#f3f4f6!important; color:#374151!important; }
+    </style>
 </head>
 <body class="bg-surface text-on-surface min-h-screen">
 
@@ -184,7 +196,7 @@
                 <th class="px-6 py-4">Activité</th>
                 <th class="px-6 py-4">Ville</th>
                 <th class="px-6 py-4">Téléphone</th>
-                <th class="px-6 py-4">Note</th>
+                <th class="px-6 py-4">Note Google</th>
                 <th class="px-6 py-4">Statut</th>
                 <th class="px-8 py-4 text-right">Validation</th>
               </tr>

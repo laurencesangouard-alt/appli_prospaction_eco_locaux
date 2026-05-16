@@ -112,6 +112,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     allContacts.forEach(c => {
       const status = c.statut || c.status || 'nouveau_lead';
+      // Exclure Perdu et Ne pas relancer du Kanban
+      if (status === 'perdu' || status === 'ne_pas_relancer') return;
+      
       const col    = COLUMNS.find(x => x.id === status) || COLUMNS[0];
       const zoneId = `cards-${col.id.replace(/\s/g,'-')}`;
       const zone   = document.getElementById(zoneId);

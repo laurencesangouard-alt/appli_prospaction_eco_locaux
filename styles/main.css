@@ -333,6 +333,8 @@ img { display: block; max-width: 100%; }
 .chip-rdv        { background: #d1fae5; color: #065f46; }
 .chip-client     { background: #a6f875; color: #1d4a00; }
 .chip-attente    { background: #f1f5f9; color: #475569; }
+.chip-perdu      { background: #fee2e2; color: #991b1b; }
+.chip-ne_pas_relancer { background: #f3f4f6; color: #374151; }
 
 /* ── Alert ── */
 .alert {
