@@ -161,6 +161,14 @@ document.addEventListener('DOMContentLoaded', async () => {
           <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M8 1.5a4.5 4.5 0 0 1 4.5 4.5c0 3.5-4.5 8.5-4.5 8.5S3.5 9.5 3.5 6A4.5 4.5 0 0 1 8 1.5z" stroke="currentColor" stroke-width="1.5"/></svg>
           ${escHtml(contact.ville || contact.city || '—')}
         </div>
+        ${contact.telephone || contact.phone ? `<div class="kanban-card-row">
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 2h2.5l1 3-1.5 1.5a9 9 0 0 0 4.5 4.5L11 9.5l3 1V13a1 1 0 0 1-1 1A11 11 0 0 1 2 3a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5"/></svg>
+          ${escHtml(contact.telephone || contact.phone)}
+        </div>` : ''}
+        ${(contact.email || contact['e-mail']) ? `<div class="kanban-card-row" style="overflow:hidden">
+          <svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 3h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5"/><path d="M2 5l6 4 6-4" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:170px">${escHtml(contact.email || contact['e-mail'])}</span>
+        </div>` : ''}
         ${relance}
       </div>
       <div class="kanban-card-footer">
