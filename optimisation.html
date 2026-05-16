@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimisation Commerciale - ProspAction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#6BA43A',
+              'primary-container': '#72bf44',
+              surface: '#fbf9f8',
+              'on-surface': '#1b1c1c',
+              'surface-container-low': '#f5f3f3',
+              'surface-container-lowest': '#ffffff',
+            },
+            fontFamily: {
+              headline: ['Space Grotesk', 'sans-serif'],
+              body: ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+
+  <!-- Header / Nav -->
+  <header class="glass-nav" id="topnav">
+    <div class="topnav-inner">
+      <a href="optimisation.html" class="nav-brand">
+        <div class="brand-icon-sm">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+            <path d="M16 2L4 8v8c0 7.73 5.14 14.96 12 16.93C22.86 30.96 28 23.73 28 16V8L16 2z" fill="white"/>
+            <path d="M11 16l3 3 7-7" stroke="#6BA43A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="nav-brand-name">ECO LOCAUX</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link active" href="optimisation.html">Recherche</a>
+        <a class="nav-link" href="contacts.html">Contacts</a>
+        <a class="nav-link" href="email-assistant.html">Email IA</a>
+        <a class="nav-link" href="kanban.html">Tableau de suivi</a>
+        <a class="nav-link" href="agenda.html">Agenda</a>
+      </div>
+      <div class="nav-user">
+        <div class="user-pill">
+          <div class="user-avatar" id="user-avatar">?</div>
+          <span class="user-name" id="user-name">…</span>
+        </div>
+        <button id="logout-btn" class="btn-icon">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-32 pb-12">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- Titre Centré -->
+      <section class="mb-12 text-center">
+        <h1 class="text-4xl md:text-6xl font-headline font-bold tracking-tighter text-on-background mb-4">Liste des nouveaux contacts</h1>
+        <p class="text-stone-500 max-w-2xl mx-auto font-medium text-lg">Identifiez les entreprises locales à fort potentiel d'optimisation énergétique. Filtrez par secteur et localisation pour débuter votre prospection.</p>
+      </section>
+
+      <!-- Barre de Recherche -->
+      <section class="mb-10">
+        <div class="max-w-5xl mx-auto bg-white rounded-3xl p-8 shadow-xl border border-stone-100">
+          <form id="search-form" class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
+            <div class="md:col-span-5">
+              <label class="block text-xs font-bold text-stone-400 uppercase tracking-widest mb-3">Secteur d'activité</label>
+              <div class="relative">
+                <select id="activity-select" class="w-full bg-stone-50 border border-stone-200 rounded-2xl px-6 py-4 text-lg font-medium appearance-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
+                  <option value="">Choisir une activité…</option>
+                  <option value="Boulangerie">Boulangerie</option>
+                  <option value="Boucherie">Boucherie</option>
+                  <option value="Restaurant">Restaurant</option>
+                  <option value="Pizzeria">Pizzeria</option>
+                  <option value="Laverie">Laverie</option>
+                  <option value="Pressing">Pressing</option>
+                </select>
+                <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-stone-400">expand_more</span>
+              </div>
+            </div>
+            <div class="md:col-span-4">
+              <label class="block text-xs font-bold text-stone-400 uppercase tracking-widest mb-3">Localisation</label>
+              <input type="text" id="city-input" class="w-full bg-stone-50 border border-stone-200 rounded-2xl px-6 py-4 text-lg font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Ville (ex: Lyon)">
+            </div>
+            <div class="md:col-span-3">
+              <button type="submit" id="search-btn" class="w-full bg-primary text-white px-8 py-4 rounded-2xl font-headline font-bold text-lg flex items-center justify-center gap-3 hover:shadow-lg hover:bg-primary-container transition-all active:scale-[0.98]">
+                <span id="search-btn-text">Rechercher</span>
+                <div id="search-spinner" class="hidden animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+              </button>
+            </div>
+          </form>
+        </div>
+        <div id="global-alert" class="max-w-5xl mx-auto mt-4 hidden px-4 py-3 rounded-xl flex items-center gap-3 text-sm font-medium">
+          <span class="material-symbols-outlined text-lg">error</span>
+          <span id="global-alert-msg"></span>
+        </div>
+      </section>
+
+      <!-- Grille d'Activités sur UNE LIGNE -->
+      <section class="mb-16">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
+          <!-- Boulangerie -->
+          <div class="group relative overflow-hidden rounded-2xl bg-white border border-stone-100 transition-all duration-300 hover:shadow-lg cursor-pointer" onclick="selectActivity('Boulangerie')">
+              <img src="img/activities/boulangerie.png" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-3">
+              <h3 class="text-white font-bold text-xs">Boulangerie</h3>
+            </div>
+          </div>
+          <!-- Boucherie -->
+          <div class="group relative overflow-hidden rounded-2xl bg-white border border-stone-100 transition-all duration-300 hover:shadow-lg cursor-pointer" onclick="selectActivity('Boucherie')">
+              <img src="img/activities/boucherie.png" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-3">
+              <h3 class="text-white font-bold text-xs">Boucherie</h3>
+            </div>
+          </div>
+          <!-- Restaurant -->
+          <div class="group relative overflow-hidden rounded-2xl bg-white border border-stone-100 transition-all duration-300 hover:shadow-lg cursor-pointer" onclick="selectActivity('Restaurant')">
+              <img src="img/activities/restaurant.png" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-3">
+              <h3 class="text-white font-bold text-xs">Restaurant</h3>
+            </div>
+          </div>
+          <!-- Pizzeria -->
+          <div class="group relative overflow-hidden rounded-2xl bg-white border border-stone-100 transition-all duration-300 hover:shadow-lg cursor-pointer" onclick="selectActivity('Pizzeria')">
+              <img src="img/activities/pizzeria.png" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-3">
+              <h3 class="text-white font-bold text-xs">Pizzeria</h3>
+            </div>
+          </div>
+          <!-- Laverie -->
+          <div class="group relative overflow-hidden rounded-2xl bg-white border border-stone-100 transition-all duration-300 hover:shadow-lg cursor-pointer" onclick="selectActivity('Laverie')">
+              <img src="img/activities/laverie.png" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-3">
+              <h3 class="text-white font-bold text-xs">Laverie</h3>
+            </div>
+          </div>
+          <!-- Pressing -->
+          <div class="group relative overflow-hidden rounded-2xl bg-white border border-stone-100 transition-all duration-300 hover:shadow-lg cursor-pointer" onclick="selectActivity('Pressing')">
+              <img src="img/activities/pressing.png" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-3">
+              <h3 class="text-white font-bold text-xs">Pressing</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tableau des Nouveaux Contacts -->
+      <div class="bg-white rounded-3xl shadow-xl border border-stone-100 overflow-hidden">
+        <div class="p-8 border-b border-stone-50 flex justify-between items-center">
+          <div>
+            <h2 class="text-2xl font-headline font-bold text-stone-900">Nouveaux contacts</h2>
+            <p id="contacts-subtitle" class="text-stone-500">Chargement des contacts…</p>
+          </div>
+          <div class="flex gap-3">
+            <button id="refresh-btn" class="p-2 text-stone-400 hover:text-primary transition-all">
+              <span class="material-symbols-outlined">refresh</span>
+            </button>
+            <button id="validate-bulk-btn" class="hidden bg-primary text-white px-6 py-2 rounded-xl font-bold text-sm flex items-center gap-2">
+              Valider la sélection
+            </button>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-stone-50 text-stone-400 text-[10px] uppercase tracking-widest font-bold">
+                <th class="px-6 py-4">Nom</th>
+                <th class="px-6 py-4">Activité</th>
+                <th class="px-6 py-4">Ville</th>
+                <th class="px-6 py-4">Téléphone</th>
+                <th class="px-6 py-4">Note</th>
+                <th class="px-6 py-4">Statut</th>
+                <th class="px-8 py-4 text-right">Validation</th>
+              </tr>
+            </thead>
+            <tbody id="contacts-tbody" class="text-stone-600">
+              <!-- Rempli par dashboard.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modale Email (requise par JS) -->
+  <div id="email-modal-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-8 shadow-2xl">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-headline font-bold" id="email-contact-name">Email IA</h2>
+        <button onclick="closeModal('email-modal-overlay')" class="text-stone-400 hover:text-stone-900"><span class="material-symbols-outlined">close</span></button>
+      </div>
+      <div id="email-generate-step">
+        <p class="text-stone-500 mb-6">Générez un email personnalisé avec l'IA d'Eco Locaux.</p>
+        <button id="generate-email-btn" class="w-full bg-primary text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2">
+          <span id="generate-email-btn-text">Générer l'email</span>
+          <div id="generate-spinner" class="hidden animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+        </button>
+      </div>
+      <div id="email-editor-step" class="hidden space-y-4">
+        <input type="text" id="email-subject" class="w-full border-stone-200 rounded-xl px-4 py-3 focus:ring-primary" placeholder="Objet">
+        <textarea id="email-body" rows="10" class="w-full border-stone-200 rounded-xl px-4 py-3 focus:ring-primary" placeholder="Corps du message"></textarea>
+      </div>
+      <div id="email-modal-footer" class="hidden flex justify-between mt-8">
+        <button id="regenerate-btn" class="text-stone-500 font-medium">Recommencer</button>
+        <button id="validate-send-btn" class="bg-primary text-white px-8 py-3 rounded-xl font-bold flex items-center gap-2">
+          <span id="send-btn-text">Valider & Envoyer</span>
+          <div id="send-spinner" class="hidden animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale RDV (requise par JS) -->
+  <div id="rdv-modal-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl">
+      <h2 class="text-2xl font-headline font-bold mb-4" id="rdv-contact-name">Planifier un RDV</h2>
+      <div class="space-y-4">
+        <input type="date" id="rdv-date" class="w-full border-stone-200 rounded-xl px-4 py-3">
+        <input type="time" id="rdv-time" class="w-full border-stone-200 rounded-xl px-4 py-3">
+        <textarea id="rdv-note" placeholder="Notes optionnelles..." class="w-full border-stone-200 rounded-xl px-4 py-3"></textarea>
+        <div class="flex gap-3 pt-4">
+          <button onclick="closeModal('rdv-modal-overlay')" class="flex-1 py-3 text-stone-500 font-medium">Annuler</button>
+          <button id="rdv-confirm-btn" class="flex-1 bg-primary text-white py-3 rounded-xl font-bold">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast / Alert system -->
+  <div id="toast-container" class="fixed bottom-8 right-8 z-[100] flex flex-col gap-3"></div>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    function selectActivity(name) {
+      const sel = document.getElementById('activity-select');
+      if (!sel) return;
+      
+      // On cherche l'option qui correspond le mieux (insensible à la casse)
+      let found = false;
+      for (let i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value.toLowerCase() === name.toLowerCase()) {
+          sel.selectedIndex = i;
+          found = true;
+          break;
+        }
+      }
+      
+      // Petit effet visuel sur le champ pour montrer que c'est sélectionné
+      sel.classList.add('ring-2', 'ring-primary/50');
+      setTimeout(() => sel.classList.remove('ring-2', 'ring-primary/50'), 1000);
+    }
+  </script>
+</body>
+</html>

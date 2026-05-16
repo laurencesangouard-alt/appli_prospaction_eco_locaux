@@ -1,0 +1,71 @@
+/* ── Login page ── */
+.login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+.login-bg {
+  position: fixed; inset: 0; z-index: 0;
+}
+.login-bg-gradient {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 30% 30%, rgba(114,191,68,.18) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 80% at 80% 70%, rgba(107,164,58,.12) 0%, transparent 70%),
+              linear-gradient(160deg, #fbf9f8 0%, #f0f5ec 100%);
+}
+.login-bg-pattern {
+  position: absolute; inset: 0; opacity: .04;
+  background-image: repeating-linear-gradient(0deg, var(--primary) 0, var(--primary) 1px, transparent 1px, transparent 48px),
+                    repeating-linear-gradient(90deg, var(--primary) 0, var(--primary) 1px, transparent 1px, transparent 48px);
+}
+
+.login-container {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 440px;
+  padding: var(--sp-lg);
+}
+.login-card {
+  padding: var(--sp-xl) var(--sp-xl);
+  animation: slideUp .3s ease;
+}
+
+.login-brand {
+  display: flex; align-items: center; gap: var(--sp-md);
+  margin-bottom: var(--sp-xl);
+}
+.brand-icon {
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--primary), var(--primary-container));
+  border-radius: var(--r-lg);
+  box-shadow: 0 4px 16px rgba(107,164,58,.3);
+  flex-shrink: 0;
+}
+.brand-text { display: flex; flex-direction: column; }
+.brand-name {
+  font-family: var(--font-headline);
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--primary); line-height: 1.1;
+}
+.brand-sub {
+  font-size: .8125rem; color: var(--on-surface-variant);
+  font-weight: 500;
+}
+
+.login-title {
+  font-family: var(--font-headline);
+  font-size: 1.75rem; font-weight: 700;
+  color: var(--on-surface); margin-bottom: 4px;
+}
+.login-subtitle {
+  font-size: .9375rem; color: var(--on-surface-variant);
+  margin-bottom: var(--sp-xl);
+}
+
+.login-form { display: flex; flex-direction: column; gap: var(--sp-md); }
+.login-footer {
+  margin-top: var(--sp-lg);
+  text-align: center;
+}
+.login-version { font-size: .75rem; color: var(--outline); }
+
+@media (max-width: 480px) {
+  .login-card { padding: var(--sp-lg); }
+}

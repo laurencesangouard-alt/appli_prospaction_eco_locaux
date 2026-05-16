@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agenda | ECO LOCAUX</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#8bda5c",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#8bda5c",
+                        "tertiary-fixed": "#caf200",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#e2e2e2",
+                        "on-tertiary-fixed": "#171e00",
+                        "inverse-surface": "#303031",
+                        "surface-bright": "#fbf9f8",
+                        "surface-dim": "#dbdad9",
+                        "surface-container-high": "#e9e8e7",
+                        "outline-variant": "#c0cab5",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3e4c00",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "outline": "#717a68",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-tertiary-container": "#384500",
+                        "on-primary-fixed": "#092100",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface-container": "#efeded",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "primary-container": "#72bf44",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-primary-fixed-variant": "#215100",
+                        "on-surface-variant": "#414939",
+                        "tertiary-fixed-dim": "#b1d500",
+                        "on-secondary-container": "#646464",
+                        "surface-variant": "#e4e2e2",
+                        "surface": "#fbf9f8",
+                        "on-error": "#ffffff",
+                        "background": "#fbf9f8",
+                        "primary-fixed": "#a6f875",
+                        "tertiary": "#536500",
+                        "surface-tint": "#6BA43A",
+                        "secondary": "#5e5e5e",
+                        "primary": "#6BA43A",
+                        "tertiary-container": "#99b800",
+                        "surface-container-low": "#f5f3f3",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#1d4a00",
+                        "on-surface": "#1b1c1c",
+                        "on-secondary-fixed": "#1b1b1b",
+                        "on-background": "#1b1c1c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "display": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-lg shadow-[0_4px_20px_rgba(0,0,0,0.03)] h-20">
+<div class="flex items-center justify-between px-10 h-full w-full max-w-[2000px] mx-auto">
+<div class="text-2xl font-black tracking-tighter text-zinc-900 dark:text-white font-headline">
+                ECO LOCAUX
+            </div>
+<nav class="hidden md:flex items-center space-x-8 font-headline font-medium tracking-tight"><a class="text-zinc-500 hover:text-[#72BF44] transition-all duration-300" href="#">Recherche ciblée</a>
+<a class="text-zinc-500 hover:text-[#72BF44] transition-all duration-300" href="#">Liste nouveaux contacts</a>
+<a class="text-zinc-500 hover:text-[#72BF44] transition-all duration-300" href="#">Consulter une fiche</a>
+<a class="text-zinc-500 hover:text-[#72BF44] transition-all duration-300" href="#">Tableau de suivi</a>
+<a class="transition-all duration-300 text-[#72BF44] font-bold border-b-2 border-[#72BF44] pb-1" href="#">Agenda</a></nav>
+<div class="flex items-center space-x-4"><span class="font-headline font-medium text-on-surface">Sébastien Morel</span>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container">
+<img alt="Sébastien Morel" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2RNxv2ki2MXxluaOI10G66JMAo1KH-bNNXPuk31XmIJqf_CIJhvc1v5shbh4_IzrTCAY2eWRvDJN7WoKJFMLkYeUgTK6SA_zjIoZmTlOdFxAnocYMIgscYcVJlUPpX6W9X3byx0zPAbjdVUHcGutVxScZZWnxL_ZnOTCYhL6mHuPuD-dSW6kotXwJHQcZS-_txi32gBWB92LUH9XpHepZuIcyAZNAvDMGNULkI6WbYBv1lA12QosUg9ik0690rP-ZWuQY0EswjB_3"/>
+</div></div>
+</div>
+</header>
+<main class="pt-28 px-10 pb-10 max-w-[2000px] mx-auto">
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Main Calendar Section -->
+<div class="flex-grow">
+<div class="flex items-center justify-between mb-8">
+<div class="space-y-1">
+<h1 class="text-4xl font-headline font-bold tracking-tight text-on-surface">Agenda</h1>
+<p class="text-on-surface-variant font-medium">Octobre 2024</p>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-low p-1 rounded-xl">
+<button class="p-2 hover:bg-surface-container-lowest rounded-lg transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="px-4 py-2 bg-surface-container-lowest shadow-sm rounded-lg font-headline font-bold text-sm">AUJOURD'HUI</button>
+<button class="p-2 hover:bg-surface-container-lowest rounded-lg transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Calendar Content -->
+<div class="bg-surface-container-low rounded-2xl overflow-hidden">
+<div class="calendar-grid border-b border-outline-variant/10 bg-surface-container-high/50">
+<div class="py-4 text-center font-headline font-bold text-xs tracking-widest text-on-surface-variant uppercase">LUN</div>
+<div class="py-4 text-center font-headline font-bold text-xs tracking-widest text-on-surface-variant uppercase">MAR</div>
+<div class="py-4 text-center font-headline font-bold text-xs tracking-widest text-on-surface-variant uppercase">MER</div>
+<div class="py-4 text-center font-headline font-bold text-xs tracking-widest text-on-surface-variant uppercase">JEU</div>
+<div class="py-4 text-center font-headline font-bold text-xs tracking-widest text-on-surface-variant uppercase">VEN</div>
+<div class="py-4 text-center font-headline font-bold text-xs tracking-widest text-on-surface-variant uppercase text-primary">SAM</div>
+<div class="py-4 text-center font-headline font-bold text-xs tracking-widest text-on-surface-variant uppercase text-primary">DIM</div>
+</div>
+<div class="calendar-grid bg-surface-container-low">
+<!-- Calendar Days (Static for demo) -->
+<div class="min-h-[140px] p-4 bg-surface-container-lowest/40 text-on-surface-variant/40">30</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest/40 text-on-surface-variant/40">31</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-r border-b border-surface-container/50">
+<span class="font-headline font-bold">1</span>
+</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-r border-b border-surface-container/50">
+<span class="font-headline font-bold">2</span>
+<div class="mt-2 space-y-1">
+<div class="px-2 py-1 bg-primary-container/20 text-on-primary-container text-[10px] font-bold rounded-md truncate">RDV Boulangerie - 10h</div>
+</div>
+</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-r border-b border-surface-container/50">
+<span class="font-headline font-bold">3</span>
+</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-r border-b border-surface-container/50">
+<span class="font-headline font-bold">4</span>
+</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-b border-surface-container/50">
+<span class="font-headline font-bold">5</span>
+</div>
+<!-- Week 2 -->
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-r border-b border-surface-container/50">
+<span class="font-headline font-bold">6</span>
+</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-r border-b border-surface-container/50">
+<span class="font-headline font-bold">7</span>
+</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-r border-b border-surface-container/50">
+<span class="font-headline font-bold">8</span>
+<div class="mt-2 space-y-1">
+<div class="px-2 py-1 bg-primary-container/20 text-on-primary-container text-[10px] font-bold rounded-md truncate">Audit Restaurant - 14h</div>
+</div>
+</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest ring-2 ring-primary ring-inset z-10 border-r border-b border-surface-container/50">
+<span class="font-headline font-bold text-primary">9</span>
+<div class="mt-2 space-y-1">
+<div class="px-2 py-1 bg-primary text-white text-[10px] font-bold rounded-md truncate">RDV Boucherie - 09h</div>
+<div class="px-2 py-1 bg-tertiary text-white text-[10px] font-bold rounded-md truncate">Audit Cave - 15h</div>
+</div>
+</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-r border-b border-surface-container/50">
+<span class="font-headline font-bold">10</span>
+</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-r border-b border-surface-container/50">
+<span class="font-headline font-bold">11</span>
+</div>
+<div class="min-h-[140px] p-4 bg-surface-container-lowest border-b border-surface-container/50">
+<span class="font-headline font-bold">12</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Panel: Daily Agenda -->
+<aside class="w-full lg:w-[400px] flex flex-col gap-6">
+<!-- Action Button -->
+<button class="w-full py-4 bg-gradient-to-br from-primary to-primary-container text-white font-headline font-bold rounded-xl shadow-lg flex items-center justify-center gap-2 hover:scale-[0.98] transition-transform">
+<span class="material-symbols-outlined">add</span>
+                    NOUVEAU RDV
+                </button>
+<!-- Daily View Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-8 shadow-[0_10px_30px_rgba(27,28,28,0.06)] flex-grow">
+<div class="mb-8">
+<h2 class="text-2xl font-headline font-bold tracking-tight">Mercredi 9 Oct.</h2>
+<p class="text-on-surface-variant text-sm mt-1">3 Événements programmés</p>
+</div>
+<div class="space-y-8 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-container">
+<!-- Appointment 1 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center ring-4 ring-white">
+<span class="material-symbols-outlined text-white text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-xs font-headline font-bold tracking-widest text-primary uppercase">09:00 — 10:30</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed text-[10px] font-bold rounded-full uppercase tracking-wider">BOUCHERIE</span>
+</div>
+<h3 class="text-lg font-headline font-bold text-on-surface">RDV Boucherie du Centre</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>12 Rue de la République, Lyon</span>
+</div>
+</div>
+</div>
+<!-- Appointment 2 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-surface-container border-2 border-primary-container flex items-center justify-center ring-4 ring-white">
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-xs font-headline font-bold tracking-widest text-on-surface-variant uppercase">11:00 — 12:00</span>
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container text-[10px] font-bold rounded-full uppercase tracking-wider">APPEL CLIENT</span>
+</div>
+<h3 class="text-lg font-headline font-bold text-on-surface">Suivi Dossier - Le Pain Doré</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">call</span>
+<span>Visioconférence Teams</span>
+</div>
+</div>
+</div>
+<!-- Appointment 3 -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-surface-container border-2 border-tertiary flex items-center justify-center ring-4 ring-white">
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-xs font-headline font-bold tracking-widest text-on-surface-variant uppercase">15:00 — 17:00</span>
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold rounded-full uppercase tracking-wider">AUDIT ÉNERGÉTIQUE</span>
+</div>
+<h3 class="text-lg font-headline font-bold text-on-surface">Audit Cave des Jacobins</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>Place des Jacobins, Lyon</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Insight Map Hint -->
+<div class="mt-12 p-4 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A detailed digital map view of a historic European city center, specifically Lyon, showing clean architectural outlines and park areas. The map is rendered in a minimalist light-mode aesthetic with soft greens and neutral greys, highlighting eco-friendly transit routes and local business districts. The visual style is crisp and modern, matching a precision consultancy interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWzSFhkPv7U6yBSISeGcdReiYo-ADpqYN-tj-qkI48eyi_QY9NDd1r8dJFa_Mg75k248h7XknBBL1jUJUkItNDiaob3bf7Wor6WGDxc3K250HaGmdlLPNASwcEXVP4cr1TNFh_8Ns8bmaYGv9WdeiGfAApG5UYyWi4PGzyKtEDBxHYwGn9tPF2MWAE5rOSwVzh61hZMTlXJKHDjCaaTbNrrrNZ6FGE8BXzOpmDkQqjRzhaf3hLrPeu0qee9PEu1Vf10VQttySVPtdE"/>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-tighter">Prochain Déplacement</p>
+<p class="text-sm font-headline font-bold">12 min en vélo (2.4km)</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

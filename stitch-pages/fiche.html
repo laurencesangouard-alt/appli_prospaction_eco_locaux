@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Consulter une fiche - ECO LOCAUX</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#b1d500",
+                      "surface-variant": "#e4e2e2",
+                      "outline-variant": "#c0cab5",
+                      "on-secondary-fixed": "#1b1b1b",
+                      "outline": "#717a68",
+                      "surface-tint": "#6BA43A",
+                      "on-tertiary-container": "#384500",
+                      "inverse-on-surface": "#f2f0f0",
+                      "secondary-fixed": "#e2e2e2",
+                      "error-container": "#ffdad6",
+                      "inverse-primary": "#8bda5c",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed-variant": "#215100",
+                      "error": "#ba1a1a",
+                      "tertiary": "#536500",
+                      "primary-container": "#72bf44",
+                      "secondary": "#5e5e5e",
+                      "inverse-surface": "#303031",
+                      "tertiary-container": "#99b800",
+                      "on-tertiary-fixed-variant": "#3e4c00",
+                      "tertiary-fixed": "#caf200",
+                      "surface-dim": "#dbdad9",
+                      "surface-bright": "#fbf9f8",
+                      "surface": "#fbf9f8",
+                      "background": "#fbf9f8",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-container": "#1d4a00",
+                      "on-background": "#1b1c1c",
+                      "secondary-fixed-dim": "#c6c6c6",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#e9e8e7",
+                      "on-secondary-container": "#646464",
+                      "on-surface-variant": "#414939",
+                      "surface-container": "#efeded",
+                      "primary-fixed": "#a6f875",
+                      "primary": "#6BA43A",
+                      "primary-fixed-dim": "#8bda5c",
+                      "on-primary": "#ffffff",
+                      "on-surface": "#1b1c1c",
+                      "surface-container-low": "#f5f3f3",
+                      "on-error-container": "#93000a",
+                      "secondary-container": "#e2e2e2",
+                      "on-secondary-fixed-variant": "#474747",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#171e00",
+                      "on-primary-fixed": "#092100",
+                      "surface-container-highest": "#e4e2e2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Space Grotesk"],
+                      "display": ["Space Grotesk"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-effect { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-950/80 backdrop-blur-xl no-border shadow-[0_10px_30px_rgba(27,28,28,0.06)]">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-black tracking-tighter text-stone-900 dark:text-white uppercase">ECO LOCAUX</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-['Space_Grotesk'] font-bold tracking-tight" href="#">Recherche ciblée</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-['Space_Grotesk'] font-bold tracking-tight" href="#">Liste nouveaux contacts</a><a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-['Space_Grotesk'] font-bold tracking-tight" href="#">Rédaction email</a>
+<a class="text-lime-700 dark:text-lime-400 border-b-2 border-lime-600 pb-1 font-['Space_Grotesk'] font-bold tracking-tight" href="#">Consulter une fiche</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-['Space_Grotesk'] font-bold tracking-tight" href="#">Tableau de suivi</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors font-['Space_Grotesk'] font-bold tracking-tight" href="#">Agenda</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-stone-100/50 dark:hover:bg-stone-800/50 rounded-lg transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-stone-600">notifications</span>
+</button>
+<button class="p-2 hover:bg-stone-100/50 dark:hover:bg-stone-800/50 rounded-lg transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-stone-600">settings</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-stone-200">
+<span class="text-sm font-medium text-stone-700">Sébastien Morel</span>
+<img alt="Sébastien Morel" class="w-10 h-10 rounded-full object-cover" data-alt="A professional portrait of a male energy consultant named Sébastien Morel. He has a warm, confident expression and is wearing a modern charcoal blazer. The background is a blurred high-end office environment with natural light and hints of architectural plants, maintaining a bright and clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3aw1wO0jxe4450tW1C7HyYANg7sb1l0opXBSrnSX0fs6KmOgvFWWHPJyw09NlfjGLEWAkamHWuLTeJ5HLiwEAC19eBNyonIL5X2k_4ZouHYRcUsAy-ZQ3njM6Zr7PXY5_Nf5G91vCwojbbtExHo7n36ySEfKaLJpZU1bm38-pWxTAoaMw-WSHqTGzFUDs_YyeqCMOLjtPnSzWFYsqaJ1DbbQbt0nQiK96wDwfFe4tLP73so30_FmhSWyAasDNaEq6t8FQp-dqFRPz"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-28 pb-20 px-8 max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<nav class="flex items-center gap-2 text-stone-400 text-sm mb-4">
+<a class="hover:text-primary transition-colors" href="#">Contacts</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>Détail du Contact</span>
+</nav>
+<h1 class="text-5xl font-black tracking-tighter mb-2">Boulangerie "Le Pain de Demain"</h1>
+<div class="flex items-center gap-4">
+<span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">En cours de diagnostic</span>
+<span class="text-stone-400 flex items-center gap-1 text-sm">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                        14 Rue de la Paix, 75002 Paris
+                    </span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-lowest text-on-surface border border-outline-variant/20 px-6 py-3 rounded-xl font-semibold hover:bg-surface-container-low transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined">event</span>
+                    Planifier un rendez-vous
+                </button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:translate-y-[-2px] transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined">save</span>
+                    Sauvegarder
+                </button>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Forms -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Informations Générales -->
+<section class="bg-surface-container-low rounded-2xl p-8 transition-all">
+<h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">business</span>
+</span>
+                        Informations Générales
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-stone-500 px-1">Adresse de l'établissement</label>
+<input class="w-full bg-surface-container-lowest border-0 rounded-xl px-4 py-3 text-stone-800 focus:ring-2 focus:ring-primary/20 transition-all" type="text" value="14 Rue de la Paix, 75002 Paris"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-stone-500 px-1">Téléphone</label>
+<input class="w-full bg-surface-container-lowest border-0 rounded-xl px-4 py-3 text-stone-800 focus:ring-2 focus:ring-primary/20 transition-all" type="tel" value="+33 1 42 61 00 00"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-stone-500 px-1">Site Web</label>
+<input class="w-full bg-surface-container-lowest border-0 rounded-xl px-4 py-3 text-stone-800 focus:ring-2 focus:ring-primary/20 transition-all" type="url" value="https://lepaindedemain.fr"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-stone-500 px-1">Email de contact</label>
+<input class="w-full bg-surface-container-lowest border-0 rounded-xl px-4 py-3 text-stone-800 focus:ring-2 focus:ring-primary/20 transition-all" type="email" value="contact@lepaindedemain.fr"/>
+</div>
+</div>
+</section>
+<!-- Enrichissement des données -->
+<section class="bg-surface-container-low rounded-2xl p-8 transition-all">
+<h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-tertiary/10 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">database</span>
+</span>
+                        Enrichissement des données
+                    </h2>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-stone-500 px-1">Type de commerce</label>
+<select class="w-full bg-surface-container-lowest border-0 rounded-xl px-4 py-3 text-stone-800 focus:ring-2 focus:ring-primary/20 transition-all">
+<option selected="">Boulangerie / Pâtisserie</option>
+<option>Restauration Rapide</option>
+<option>Commerce de détail</option>
+<option>Supermarché de proximité</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-stone-500 px-1">Équipement énergétique</label>
+<input class="w-full bg-surface-container-lowest border-0 rounded-xl px-4 py-3 text-stone-800 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Ex: Four électrique haute performance, vitrines réfrigérées" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-stone-500 px-1">Notes du commercial</label>
+<textarea class="w-full bg-surface-container-lowest border-0 rounded-xl px-4 py-3 text-stone-800 focus:ring-2 focus:ring-primary/20 transition-all resize-none" rows="4">Propriétaire très intéressé par la réduction de l'empreinte carbone. Le matériel de cuisson est vieillissant (plus de 10 ans). Potentiel élevé pour une aide à la rénovation énergétique globale.</textarea>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Sidebar Actions & History -->
+<div class="lg:col-span-4 space-y-8">
+<!-- AI Action Card -->
+<div class="relative overflow-hidden rounded-2xl bg-stone-900 p-8 text-white group shadow-2xl">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl group-hover:bg-primary/40 transition-all"></div>
+<h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed">auto_awesome</span>
+                        Assistant IA
+                    </h3>
+<p class="text-stone-400 text-sm mb-8 leading-relaxed">
+                        Prêt à transformer ce prospect ? Notre IA peut analyser les notes du diagnostic pour rédiger une proposition commerciale personnalisée.
+                    </p>
+<button class="w-full bg-primary text-white py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-primary-container hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined">mail</span>
+                        Générer un email
+                    </button>
+</div>
+<!-- Historique et Actions -->
+<section class="bg-surface-container-low rounded-2xl p-8">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-stone-400">history</span>
+                        Suivi d'activité
+                    </h2>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-2 h-2 rounded-full bg-primary mb-2"></div>
+<div class="w-0.5 h-full bg-outline-variant/30"></div>
+</div>
+<div class="pb-6">
+<p class="text-xs font-bold uppercase tracking-widest text-stone-400 mb-1">Dernier contact</p>
+<p class="text-sm font-medium">Appel téléphonique - 12 Octobre 2024</p>
+<p class="text-xs text-stone-500 mt-1 italic">"A discuté des subventions ADEME"</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="w-2 h-2 rounded-full bg-tertiary mb-2"></div>
+</div>
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-stone-400 mb-1">Prochaine relance</p>
+<p class="text-sm font-bold text-tertiary">Mercredi 25 Octobre 2024</p>
+<p class="text-xs text-stone-500 mt-1">Envoi du devis préliminaire</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Widget -->
+<div class="rounded-2xl overflow-hidden h-48 bg-surface-container-high relative group">
+<img alt="Carte localisation" class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" data-alt="A stylized, architectural map view of a Parisian neighborhood featuring clean lines and a minimalist aesthetic. The map shows the intersection of streets near Rue de la Paix with elegant 19th-century buildings rendered in soft tones. A single, vibrant green location pin marks the site, harmonizing with the ECO LOCAUX brand colors." data-location="Paris, France" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLPLuPSeiJuc863aypYGymIdb0fkm7iCbQg9GpEhtMRssnC1ooRS1SAPn1wihqivKDnC9gvKY6gXxRuvqYf7hnv9DAYnwW_58JKg0LUqa5cp041pQtvlhltPfXP9BEtiyeQE8JsRgyZ45l7CaMUsmEFyf9jFRELPDsM7vlwoassmLRaPBOUYVWfZq-D0rxtQ-nrU9Qj0pfkLpBQEFyGETEsyVcv012DIR_SxF9Pxnoe8bMwWSowx9umhOA9l2k7vMpZjXX1dsbq2Gr"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="bg-primary text-white p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-stone-200/15 dark:border-stone-800/15 bg-stone-50 dark:bg-stone-900 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 py-12 w-full gap-4">
+<p class="font-['Inter'] text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400">© 2024 ECO LOCAUX. Precision Architect Performance.</p>
+<div class="flex gap-8">
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 hover:text-lime-600 transition-colors opacity-80 hover:opacity-100" href="#">Mentions Légales</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 hover:text-lime-600 transition-colors opacity-80 hover:opacity-100" href="#">Confidentialité</a>
+<a class="font-['Inter'] text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 hover:text-lime-600 transition-colors opacity-80 hover:opacity-100" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>

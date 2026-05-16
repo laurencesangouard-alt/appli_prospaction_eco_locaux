@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#215100",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#99b800",
+                    "surface-container-high": "#e9e8e7",
+                    "on-tertiary-fixed-variant": "#3e4c00",
+                    "tertiary-fixed": "#caf200",
+                    "surface-container-low": "#f5f3f3",
+                    "on-primary-fixed": "#092100",
+                    "surface-container-highest": "#e4e2e2",
+                    "outline": "#717a68",
+                    "on-secondary-fixed": "#1b1b1b",
+                    "secondary-fixed": "#e2e2e2",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#f2f0f0",
+                    "tertiary": "#536500",
+                    "surface-container": "#efeded",
+                    "surface-bright": "#fbf9f8",
+                    "on-background": "#1b1c1c",
+                    "primary-fixed-dim": "#8bda5c",
+                    "on-secondary-container": "#646464",
+                    "inverse-primary": "#8bda5c",
+                    "primary": "#6BA43A",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#1d4a00",
+                    "surface-variant": "#e4e2e2",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#171e00",
+                    "primary-container": "#72bf44",
+                    "inverse-surface": "#303031",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "on-secondary-fixed-variant": "#474747",
+                    "tertiary-fixed-dim": "#b1d500",
+                    "on-surface": "#1b1c1c",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#c0cab5",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#414939",
+                    "secondary-container": "#e2e2e2",
+                    "background": "#fbf9f8",
+                    "surface-tint": "#6BA43A",
+                    "surface": "#fbf9f8",
+                    "secondary": "#5e5e5e",
+                    "primary-fixed": "#a6f875",
+                    "on-tertiary-container": "#384500",
+                    "surface-dim": "#dbdad9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-xl shadow-[0_10px_30px_rgba(27,28,28,0.06)] flex justify-between items-center px-8 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-stone-900 dark:text-stone-50 brand-font">ECO LOCAUX</span>
+<div class="hidden md:flex items-center gap-6 font-['Space_Grotesk'] tracking-tight"><a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">Recherche ciblée</a><a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">Liste nouveaux contacts</a><a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">Rédaction email</a><a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">Consulter une fiche</a><a class="text-lime-700 dark:text-lime-400 border-b-2 border-lime-600 transition-colors" href="#">Tableau de suivi</a><a class="text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#">Agenda</a></div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-stone-500 hover:text-lime-700 transition-colors scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-stone-500 hover:text-lime-700 transition-colors scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="flex items-center gap-3 pl-2 ml-2 border-l border-surface-container"><span class="text-sm font-semibold text-stone-900 dark:text-stone-100 font-headline hidden sm:block">Sébastien Morel</span><img alt="Sébastien Morel" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrwAvBfuHCH7zcFA3KQJ_o_sraQSr3F6_voIhw5vdQ_hP17XasY_NwGUykjyCRfMhVgcks_KhnzLWd7DFap_20EpdRwRi36BFi5MfLBPUlg-HsDtSPIpAOfEHD7aJ1dU8Ej-4rZm2EWErE-dGtBu07_li2wKtjN1jTbot-v9fqTLiiTzMXfuBVChqQV-WZlpCmT7qrfGWHMo4-oT_Gref0AlcwfjPAxP8PxVAusLVCTG3DwMlab_nLDUL-NRXXlX4nKfFAiiog6f-k"/></div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-24 px-8 pb-12 w-full max-w-[1600px] mx-auto">
+<header class="mb-10 max-w-7xl">
+<div class="flex flex-col gap-1">
+<h1 class="text-4xl font-bold tracking-tight text-on-surface">Tableau de suivi</h1>
+<p class="text-secondary font-medium body-sm">Gérez vos opportunités d'efficiency énergétique avec précision.</p>
+</div>
+</header>
+<!-- Kanban Board -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-start">
+<!-- Nouveau lead -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<h3 class="font-headline font-bold text-lg text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                        Nouveau lead
+                    </h3>
+<span class="text-xs font-bold bg-surface-container-high px-2 py-1 rounded-full text-secondary">3</span>
+</div>
+<div class="flex flex-col gap-4 p-4 rounded-xl bg-surface-container-low min-h-[600px]">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform cursor-pointer border-l-4 border-primary/20">
+<div class="flex flex-col gap-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-tertiary-container text-on-tertiary-container w-fit">
+                                🥖 Boulangerie
+                            </span>
+<div>
+<h4 class="font-bold text-on-surface brand-font text-base">Le Pain d'Or - Lyon</h4>
+</div>
+<div class="flex flex-col gap-1 pt-2 border-t border-surface-container">
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Dernier contact :</span>
+<span class="font-medium">12 Oct. 2023</span>
+</p>
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Statut :</span>
+<span class="font-medium text-primary">Inbound</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform cursor-pointer border-l-4 border-primary/20">
+<div class="flex flex-col gap-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-tertiary-container text-on-tertiary-container w-fit">
+                                🧼 Pressing
+                            </span>
+<div>
+<h4 class="font-bold text-on-surface brand-font text-base">Net Clean - Villeurbanne</h4>
+</div>
+<div class="flex flex-col gap-1 pt-2 border-t border-surface-container">
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Dernier contact :</span>
+<span class="font-medium">14 Oct. 2023</span>
+</p>
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Statut :</span>
+<span class="font-medium text-primary">En attente</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Email envoyé -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<h3 class="font-headline font-bold text-lg text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                        Email envoyé
+                    </h3>
+<span class="text-xs font-bold bg-surface-container-high px-2 py-1 rounded-full text-secondary">2</span>
+</div>
+<div class="flex flex-col gap-4 p-4 rounded-xl bg-surface-container-low min-h-[600px]">
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform cursor-pointer border-l-4 border-blue-500/20">
+<div class="flex flex-col gap-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-tertiary-container text-on-tertiary-container w-fit">
+                                🥩 Boucherie
+                            </span>
+<div>
+<h4 class="font-bold text-on-surface brand-font text-base">Maison Garcia - Bron</h4>
+</div>
+<div class="flex flex-col gap-1 pt-2 border-t border-surface-container">
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Dernier contact :</span>
+<span class="font-medium">08 Oct. 2023</span>
+</p>
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Statut :</span>
+<span class="font-medium text-blue-600">Prospection</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- À relancer -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<h3 class="font-headline font-bold text-lg text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        À relancer
+                    </h3>
+<span class="text-xs font-bold bg-surface-container-high px-2 py-1 rounded-full text-secondary">4</span>
+</div>
+<div class="flex flex-col gap-4 p-4 rounded-xl bg-surface-container-low min-h-[600px]">
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform cursor-pointer border-l-4 border-amber-500/20">
+<div class="flex flex-col gap-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-tertiary-container text-on-tertiary-container w-fit">
+                                🍽️ Restaurant
+                            </span>
+<div>
+<h4 class="font-bold text-on-surface brand-font text-base">La Table Bio - Dardilly</h4>
+</div>
+<div class="flex flex-col gap-1 pt-2 border-t border-surface-container">
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Dernier contact :</span>
+<span class="font-medium text-amber-600">22 Sep. 2023</span>
+</p>
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Statut :</span>
+<span class="font-medium text-amber-600">Relance J+15</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform cursor-pointer border-l-4 border-amber-500/20">
+<div class="flex flex-col gap-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-tertiary-container text-on-tertiary-container w-fit">
+                                🧺 Laverie
+                            </span>
+<div>
+<h4 class="font-bold text-on-surface brand-font text-base">Wash &amp; Go - Oullins</h4>
+</div>
+<div class="flex flex-col gap-1 pt-2 border-t border-surface-container">
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Dernier contact :</span>
+<span class="font-medium text-amber-600">01 Oct. 2023</span>
+</p>
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Statut :</span>
+<span class="font-medium text-amber-600">Absence de réponse</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RDV planifié -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center px-2">
+<h3 class="font-headline font-bold text-lg text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                        RDV planifié
+                    </h3>
+<span class="text-xs font-bold bg-surface-container-high px-2 py-1 rounded-full text-secondary">1</span>
+</div>
+<div class="flex flex-col gap-4 p-4 rounded-xl bg-surface-container-low min-h-[600px]">
+<!-- Card 6 -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1 transition-transform cursor-pointer border-l-4 border-primary-container/40">
+<div class="flex flex-col gap-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-primary-fixed text-on-primary-fixed w-fit">
+                                🍕 Pizzeria
+                            </span>
+<div>
+<h4 class="font-bold text-on-surface brand-font text-base">Bella Napoli - Lyon 03</h4>
+</div>
+<div class="flex flex-col gap-1 pt-2 border-t border-surface-container">
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>RDV fixé :</span>
+<span class="font-bold text-primary">20 Oct. 2023</span>
+</p>
+<p class="text-xs text-on-surface-variant flex items-center justify-between">
+<span>Statut :</span>
+<span class="font-medium text-primary">Confirmé</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Hidden on detail, shown on Dashboard/Pipeline) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-primary to-primary-container text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform lg:hidden">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</body></html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ECO LOCAUX - Gestion des Contacts</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "on-surface": "#1b1c1c",
+                        "on-surface-variant": "#414939",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "background": "#fbf9f8",
+                        "surface-container-high": "#e9e8e7",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-background": "#1b1c1c",
+                        "tertiary-container": "#99b800",
+                        "on-primary-fixed-variant": "#215100",
+                        "surface-dim": "#dbdad9",
+                        "on-tertiary-fixed-variant": "#3e4c00",
+                        "surface-container-low": "#f5f3f3",
+                        "primary-fixed": "#a6f875",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#6BA43A",
+                        "outline-variant": "#c0cab5",
+                        "on-secondary-fixed-variant": "#474747",
+                        "tertiary": "#536500",
+                        "surface-bright": "#fbf9f8",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-error": "#ffffff",
+                        "outline": "#717a68",
+                        "primary-container": "#72bf44",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#092100",
+                        "primary": "#6BA43A",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#b1d500",
+                        "primary-fixed-dim": "#8bda5c",
+                        "surface-container": "#efeded",
+                        "secondary": "#5e5e5e",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#303031",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-primary-container": "#1d4a00",
+                        "on-secondary-fixed": "#1b1b1b",
+                        "inverse-primary": "#8bda5c",
+                        "on-tertiary-container": "#384500",
+                        "tertiary-fixed": "#caf200",
+                        "surface": "#fbf9f8",
+                        "secondary-container": "#e2e2e2",
+                        "on-secondary-container": "#646464",
+                        "surface-variant": "#e4e2e2",
+                        "on-tertiary-fixed": "#171e00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "display": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        .card-shadow:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 glass-nav">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 shrink-0">
+<img alt="ECO LOCAUX Logo" class="h-9 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAtJf7fIqFrTvoOWaEaEll7yVKErREayUCCTh1pGPa5TaDTMy8ujrg0ZLxbq2kKy73XQjx1HojdA8KhaxH5UbL_nqqGjaJht3OMI9c-hhLMUJPUCcRFnp0NyOoTUlUZlMpbysZMZr48R5RFR0p01TbQqHNuo1-v79P8OoJNGlPyPUOQCsu069CmiLvRLfmblkoxUpH3HVhwCjPjPRmeG9RDhIJP7MmXI6SAC28nHssr3gQxceMggCHxmCbYGoRVF18WKKXYbiiKACf"/>
+<span class="text-xl font-bold text-stone-900 font-headline tracking-tight uppercase hidden sm:block">ECO LOCAUX</span>
+</div>
+<nav class="hidden md:flex items-center gap-1"><a class="px-4 py-2 text-stone-500 hover:text-stone-900 transition-colors font-medium" href="#">Recherche ciblée</a>
+<a class="px-4 py-2 text-primary font-bold border-b-2 border-primary" href="#">Liste nouveaux contacts</a>
+<a class="px-4 py-2 text-stone-500 hover:text-stone-900 transition-colors font-medium" href="#">Rédaction email</a>
+<a class="px-4 py-2 text-stone-500 hover:text-stone-900 transition-colors font-medium" href="#">Consulter une fiche</a>
+<a class="px-4 py-2 text-stone-500 hover:text-stone-900 transition-colors font-medium" href="#">Tableau de suivi</a>
+<a class="px-4 py-2 text-stone-500 hover:text-stone-900 transition-colors font-medium" href="#">Agenda</a></nav>
+</div>
+<div class="flex items-center gap-4 border-l border-stone-200 pl-6">
+<div class="flex items-center gap-3">
+<p class="text-sm font-bold text-stone-900">Sébastien Morel</p>
+<img alt="Sébastien Morel" class="w-8 h-8 rounded-full object-cover border border-stone-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1h8KjHbpJE6TBlRdfsskKelvORVvAnGdEEDWvY6LonzNu5_4XEz9ZU2qDUPgdRBn7490eTryqXIAmFHnc8ZP_bnGIyDRMUjo5FGKTeyO5HKCsnodHrZgtCV_gholwF7lY2rHosVjtJYJv2LTpZRu0C0z1nOMxFlgw2aHXtZNX6ZHSrwVU9LtSS5UITwr-70bgOXXD8VyfImN4sCQvMBSkA2zYsz_j1VN-voJgvvTnAR1e2kAm37oVMwR4T0vmItNIZhA-E1kHcmXi"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col gap-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-headline font-bold text-3xl text-stone-900 mb-1">Liste nouveaux contacts</h1>
+<p class="text-stone-500 text-sm">Gestion du flux d'efficacité énergétique</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 bg-white border border-stone-200 text-stone-700 text-xs font-bold uppercase rounded-lg hover:bg-stone-50 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">filter_list</span> Filtres
+                        </button>
+</div>
+</div>
+<!-- Main Content Area: Results List -->
+<section class="space-y-4 min-w-0">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-xl border border-stone-200 card-shadow gap-4">
+<div class="flex items-center gap-4">
+<p class="text-stone-600 text-sm"><span class="font-bold text-stone-900">5 contacts</span> trouvés</p>
+<div class="hidden sm:block h-4 w-px bg-stone-200"></div>
+<div class="flex gap-2">
+<span class="px-2 py-0.5 bg-stone-100 text-stone-600 text-[10px] font-bold rounded flex items-center gap-1">
+                                    Secteur: Industrie <button class="material-symbols-outlined text-[12px] hover:text-stone-900">close</button>
+</span>
+</div>
+</div>
+<div class="flex gap-4 w-full sm:w-auto justify-between sm:justify-end">
+<button class="flex items-center gap-2 text-stone-600 text-xs font-bold uppercase hover:text-stone-900 transition-colors">
+<span class="material-symbols-outlined text-lg">swap_vert</span> Trier par score
+                            </button>
+<button class="flex items-center gap-2 text-stone-600 text-xs font-bold uppercase hover:text-stone-900 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span> Export
+                            </button>
+</div>
+</div>
+<!-- Prospect List -->
+<div class="space-y-4">
+<!-- Card 1: Manufacture des Alpes -->
+<div class="bg-white rounded-xl border border-stone-200 overflow-hidden card-shadow transition-all hover:border-primary/40 group">
+<div class="p-6 flex flex-col md:flex-row items-start md:items-stretch gap-6">
+<div class="hidden md:flex flex-col items-center gap-3">
+<input class="w-5 h-5 rounded border-stone-300 text-primary focus:ring-primary" type="checkbox"/>
+<div class="w-1 flex-1 bg-stone-100 rounded-full group-hover:bg-primary/20 transition-colors"></div>
+</div>
+<div class="flex-1 w-full min-w-0">
+<div class="flex flex-col md:flex-row items-start justify-between mb-4 gap-4">
+<div class="min-w-0">
+<div class="flex items-center gap-3 mb-1 flex-wrap">
+<span class="px-2 py-0.5 bg-stone-900 text-white text-[10px] font-bold uppercase rounded">🥖 Boulangerie</span>
+<div class="flex items-center text-amber-500 gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.8</span>
+</div>
+</div>
+<h2 class="font-headline font-bold text-2xl text-stone-900 truncate">Manufacture des Alpes</h2>
+<p class="text-stone-500 text-sm flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm text-stone-400">location_on</span> 124 Avenue du Mont-Blanc, 74000 Annecy
+                                            </p>
+</div>
+<div class="md:text-right w-full md:w-auto">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-1">NOTE GOOGLE</p>
+<div class="flex items-baseline md:justify-end gap-1">
+<span class="font-headline font-bold text-4xl text-primary">4.8</span>
+<span class="text-stone-400 text-xs font-medium">/5</span>
+</div>
+<div class="w-full md:w-24 h-1.5 bg-stone-100 rounded-full mt-1 overflow-hidden ml-auto">
+<div class="bg-primary h-full w-[96%]" style="width: 96%;"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 py-4 my-4 border-y border-stone-100">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 group-hover:bg-primary-fixed/30 transition-colors shrink-0">
+<span class="material-symbols-outlined text-lg">call</span>
+</div>
+<span class="text-sm font-medium text-stone-700 truncate">04 50 22 33 44</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 group-hover:bg-primary-fixed/30 transition-colors shrink-0">
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+<span class="text-sm font-medium text-stone-700 truncate">contact@alpes-manufacture.fr</span>
+</div>
+<div class="flex items-center gap-3 sm:col-span-2 lg:col-span-1">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 group-hover:bg-primary-fixed/30 transition-colors shrink-0">
+<span class="material-symbols-outlined text-lg">language</span>
+</div>
+<a class="text-sm font-bold text-primary hover:underline truncate" href="#">alpes-manufacture.fr</a>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-stone-600 uppercase tracking-tight">Action : Relance à planifier</span>
+</div>
+<div class="flex flex-wrap gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-5 py-2.5 bg-primary text-white text-xs font-bold rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-base">auto_awesome</span> Générer un email
+                                            </button>
+<button class="flex-1 sm:flex-none px-5 py-2.5 border border-stone-200 text-stone-900 text-xs font-bold rounded-lg hover:bg-stone-50 transition-colors">
+                                                Planifier appel
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: LogiSud Transports -->
+<div class="bg-white rounded-xl border border-stone-200 overflow-hidden card-shadow transition-all hover:border-error/40 group">
+<div class="p-6 flex flex-col md:flex-row items-start md:items-stretch gap-6">
+<div class="hidden md:flex flex-col items-center gap-3">
+<input class="w-5 h-5 rounded border-stone-300 text-primary focus:ring-primary" type="checkbox"/>
+<div class="w-1 flex-1 bg-error/10 rounded-full"></div>
+</div>
+<div class="flex-1 w-full min-w-0">
+<div class="flex flex-col md:flex-row items-start justify-between mb-4 gap-4">
+<div class="min-w-0">
+<div class="flex items-center gap-3 mb-1 flex-wrap">
+<span class="px-2 py-0.5 bg-stone-100 text-stone-600 text-[10px] font-bold uppercase rounded">🥩 Boucherie</span>
+<div class="flex items-center text-amber-500 gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.2</span>
+</div>
+<span class="px-2 py-0.5 bg-error-container text-on-error-container text-[10px] font-bold uppercase rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">priority_high</span> Relance retardée
+                                                </span>
+</div>
+<h2 class="font-headline font-bold text-2xl text-stone-900 truncate">LogiSud Transports</h2>
+<p class="text-stone-500 text-sm flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm text-stone-400">location_on</span> Zone Franche de l'Est, 13001 Marseille
+                                            </p>
+</div>
+<div class="md:text-right w-full md:w-auto">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-1">NOTE GOOGLE</p>
+<div class="flex items-baseline md:justify-end gap-1">
+<span class="font-headline font-bold text-4xl text-stone-600">4.2</span>
+<span class="text-stone-400 text-xs font-medium">/5</span>
+</div>
+<div class="w-full md:w-24 h-1.5 bg-stone-100 rounded-full mt-1 overflow-hidden ml-auto">
+<div class="bg-stone-400 h-full w-[84%]" style="width: 84%;"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 py-4 my-4 border-y border-stone-100">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 shrink-0">
+<span class="material-symbols-outlined text-lg">call</span>
+</div>
+<span class="text-sm font-medium text-stone-700 truncate">04 91 00 11 22</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 shrink-0">
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+<span class="text-sm font-medium text-stone-700 truncate">h.dupont@logisud.com</span>
+</div>
+<div class="flex items-center gap-3 sm:col-span-2 lg:col-span-1">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 shrink-0">
+<span class="material-symbols-outlined text-lg">language</span>
+</div>
+<a class="text-sm font-bold text-primary hover:underline truncate" href="#">logisud-solutions.com</a>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="text-[11px] font-bold text-error uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">alarm</span> PROCHAINE RELANCE : 12 OCT (RETARD +12J)
+                                        </div>
+<div class="flex flex-wrap gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-5 py-2.5 bg-primary text-white text-xs font-bold rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-base">auto_awesome</span> Générer un email
+                                            </button>
+<button class="flex-1 sm:flex-none px-5 py-2.5 border border-stone-200 text-stone-900 text-xs font-bold rounded-lg hover:bg-stone-50 transition-colors">
+                                                Planifier appel
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: BioCoop Central Halles -->
+<div class="bg-white rounded-xl border border-stone-200 overflow-hidden card-shadow transition-all hover:border-primary/40 group">
+<div class="p-6 flex flex-col md:flex-row items-start md:items-stretch gap-6">
+<div class="hidden md:flex flex-col items-center gap-3">
+<input class="w-5 h-5 rounded border-stone-300 text-primary focus:ring-primary" type="checkbox"/>
+<div class="w-1 flex-1 bg-stone-100 rounded-full group-hover:bg-primary/20 transition-colors"></div>
+</div>
+<div class="flex-1 w-full min-w-0">
+<div class="flex flex-col md:flex-row items-start justify-between mb-4 gap-4">
+<div class="min-w-0">
+<div class="flex items-center gap-3 mb-1 flex-wrap">
+<span class="px-2 py-0.5 bg-stone-100 text-stone-600 text-[10px] font-bold uppercase rounded">🍴 Restaurant</span>
+<div class="flex items-center text-amber-500 gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.9</span>
+</div>
+</div>
+<h2 class="font-headline font-bold text-2xl text-stone-900 truncate">BioCoop Central Halles</h2>
+<p class="text-stone-500 text-sm flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm text-stone-400">location_on</span> 5 Place des Cordeliers, 69002 Lyon
+                                            </p>
+</div>
+<div class="md:text-right w-full md:w-auto">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-1">NOTE GOOGLE</p>
+<div class="flex items-baseline md:justify-end gap-1">
+<span class="font-headline font-bold text-4xl text-primary">4.9</span>
+<span class="text-stone-400 text-xs font-medium">/5</span>
+</div>
+<div class="w-full md:w-24 h-1.5 bg-stone-100 rounded-full mt-1 overflow-hidden ml-auto">
+<div class="bg-primary h-full w-[98%]" style="width: 98%;"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 py-4 my-4 border-y border-stone-100">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 group-hover:bg-primary-fixed/30 transition-colors shrink-0">
+<span class="material-symbols-outlined text-lg">call</span>
+</div>
+<span class="text-sm font-medium text-stone-700 truncate">04 72 44 55 66</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 group-hover:bg-primary-fixed/30 transition-colors shrink-0">
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+<span class="text-sm font-medium text-stone-700 truncate">direction@biocoop-halles.fr</span>
+</div>
+<div class="flex items-center gap-3 sm:col-span-2 lg:col-span-1">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 group-hover:bg-primary-fixed/30 transition-colors shrink-0">
+<span class="material-symbols-outlined text-lg">language</span>
+</div>
+<a class="text-sm font-bold text-primary hover:underline truncate" href="#">biocoop-lyon.fr</a>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-stone-600 uppercase tracking-tight">Action : Appel en cours</span>
+</div>
+<div class="flex flex-wrap gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-5 py-2.5 bg-primary text-white text-xs font-bold rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-base">auto_awesome</span> Générer un email
+                                            </button>
+<button class="flex-1 sm:flex-none px-5 py-2.5 border border-stone-200 text-stone-900 text-xs font-bold rounded-lg hover:bg-stone-50 transition-colors">
+                                                Planifier appel
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4: Pressing de la Poste -->
+<div class="bg-white rounded-xl border border-stone-200 overflow-hidden card-shadow transition-all hover:border-primary/40 group">
+<div class="p-6 flex flex-col md:flex-row items-start md:items-stretch gap-6">
+<div class="hidden md:flex flex-col items-center gap-3">
+<input class="w-5 h-5 rounded border-stone-300 text-primary focus:ring-primary" type="checkbox"/>
+<div class="w-1 flex-1 bg-stone-100 rounded-full group-hover:bg-primary/20 transition-colors"></div>
+</div>
+<div class="flex-1 w-full min-w-0">
+<div class="flex flex-col md:flex-row items-start justify-between mb-4 gap-4">
+<div class="min-w-0">
+<div class="flex items-center gap-3 mb-1 flex-wrap">
+<span class="px-2 py-0.5 bg-stone-100 text-stone-600 text-[10px] font-bold uppercase rounded">🧺 Pressing</span>
+<div class="flex items-center text-amber-500 gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.5</span>
+</div>
+</div>
+<h2 class="font-headline font-bold text-2xl text-stone-900 truncate">Pressing de la Poste</h2>
+<p class="text-stone-500 text-sm flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm text-stone-400">location_on</span> 14 Rue de la Paix, 59000 Lille
+                                            </p>
+</div>
+<div class="md:text-right w-full md:w-auto">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-1">NOTE GOOGLE</p>
+<div class="flex items-baseline md:justify-end gap-1">
+<span class="font-headline font-bold text-4xl text-primary">4.5</span>
+<span class="text-stone-400 text-xs font-medium">/5</span>
+</div>
+<div class="w-full md:w-24 h-1.5 bg-stone-100 rounded-full mt-1 overflow-hidden ml-auto">
+<div class="bg-primary h-full w-[90%]" style="width: 90%;"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 py-4 my-4 border-y border-stone-100">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 shrink-0">
+<span class="material-symbols-outlined text-lg">call</span>
+</div>
+<span class="text-sm font-medium text-stone-700 truncate">03 20 55 88 99</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 shrink-0">
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+<span class="text-sm font-medium text-stone-700 truncate">contact@pressing-poste.fr</span>
+</div>
+<div class="flex items-center gap-3 sm:col-span-2 lg:col-span-1">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 shrink-0">
+<span class="material-symbols-outlined text-lg">language</span>
+</div>
+<a class="text-sm font-bold text-primary hover:underline truncate" href="#">pressing-poste.fr</a>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-stone-600 uppercase tracking-tight">Action : Devis à envoyer</span>
+</div>
+<div class="flex flex-wrap gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-5 py-2.5 bg-primary text-white text-xs font-bold rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-base">auto_awesome</span> Générer un email
+                                            </button>
+<button class="flex-1 sm:flex-none px-5 py-2.5 border border-stone-200 text-stone-900 text-xs font-bold rounded-lg hover:bg-stone-50 transition-colors">
+                                                Planifier appel
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 5: Laverie Éco-Sud -->
+<div class="bg-white rounded-xl border border-stone-200 overflow-hidden card-shadow transition-all hover:border-primary/40 group">
+<div class="p-6 flex flex-col md:flex-row items-start md:items-stretch gap-6">
+<div class="hidden md:flex flex-col items-center gap-3">
+<input class="w-5 h-5 rounded border-stone-300 text-primary focus:ring-primary" type="checkbox"/>
+<div class="w-1 flex-1 bg-stone-100 rounded-full group-hover:bg-primary/20 transition-colors"></div>
+</div>
+<div class="flex-1 w-full min-w-0">
+<div class="flex flex-col md:flex-row items-start justify-between mb-4 gap-4">
+<div class="min-w-0">
+<div class="flex items-center gap-3 mb-1 flex-wrap">
+<span class="px-2 py-0.5 bg-stone-100 text-stone-600 text-[10px] font-bold uppercase rounded">🧼 Laverie</span>
+<div class="flex items-center text-amber-500 gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold">4.7</span>
+</div>
+</div>
+<h2 class="font-headline font-bold text-2xl text-stone-900 truncate">Laverie Éco-Sud</h2>
+<p class="text-stone-500 text-sm flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm text-stone-400">location_on</span> 22 Boulevard Michelet, 13008 Marseille
+                                            </p>
+</div>
+<div class="md:text-right w-full md:w-auto">
+<p class="text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-1">NOTE GOOGLE</p>
+<div class="flex items-baseline md:justify-end gap-1">
+<span class="font-headline font-bold text-4xl text-primary">4.7</span>
+<span class="text-stone-400 text-xs font-medium">/5</span>
+</div>
+<div class="w-full md:w-24 h-1.5 bg-stone-100 rounded-full mt-1 overflow-hidden ml-auto">
+<div class="bg-primary h-full w-[94%]" style="width: 94%;"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 py-4 my-4 border-y border-stone-100">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 shrink-0">
+<span class="material-symbols-outlined text-lg">call</span>
+</div>
+<span class="text-sm font-medium text-stone-700 truncate">04 91 22 33 44</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 shrink-0">
+<span class="material-symbols-outlined text-lg">mail</span>
+</div>
+<span class="text-sm font-medium text-stone-700 truncate">contact@laverie-ecosud.fr</span>
+</div>
+<div class="flex items-center gap-3 sm:col-span-2 lg:col-span-1">
+<div class="w-8 h-8 rounded-lg bg-stone-50 flex items-center justify-center text-stone-400 shrink-0">
+<span class="material-symbols-outlined text-lg">language</span>
+</div>
+<a class="text-sm font-bold text-primary hover:underline truncate" href="#">laverie-ecosud.fr</a>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-stone-600 uppercase tracking-tight">Action : Relance à planifier</span>
+</div>
+<div class="flex flex-wrap gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-5 py-2.5 bg-primary text-white text-xs font-bold rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-base">auto_awesome</span> Générer un email
+                                            </button>
+<button class="flex-1 sm:flex-none px-5 py-2.5 border border-stone-200 text-stone-900 text-xs font-bold rounded-lg hover:bg-stone-50 transition-colors">
+                                                Planifier appel
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Floating Action Bar (Mass Actions) -->
+</body></html>

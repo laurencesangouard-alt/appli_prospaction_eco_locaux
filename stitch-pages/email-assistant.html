@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ECO LOCAUX - Email Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#e2e2e2",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fbf9f8",
+                    "surface-container-low": "#f5f3f3",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "primary-container": "#72bf44",
+                    "on-tertiary-fixed": "#171e00",
+                    "surface-variant": "#e4e2e2",
+                    "surface-container-highest": "#e4e2e2",
+                    "primary-fixed": "#a6f875",
+                    "primary": "#6BA43A",
+                    "on-secondary-fixed-variant": "#474747",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#303031",
+                    "on-secondary-fixed": "#1b1b1b",
+                    "primary-fixed-dim": "#8bda5c",
+                    "on-background": "#1b1c1c",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#99b800",
+                    "on-primary-fixed-variant": "#215100",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#384500",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#b1d500",
+                    "on-tertiary-fixed-variant": "#3e4c00",
+                    "on-surface-variant": "#414939",
+                    "background": "#fbf9f8",
+                    "surface-dim": "#dbdad9",
+                    "surface-container-high": "#e9e8e7",
+                    "outline-variant": "#c0cab5",
+                    "tertiary-fixed": "#caf200",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#1d4a00",
+                    "tertiary": "#536500",
+                    "on-surface": "#1b1c1c",
+                    "error": "#ba1a1a",
+                    "secondary": "#5e5e5e",
+                    "surface-tint": "#6BA43A",
+                    "secondary-fixed": "#e2e2e2",
+                    "on-secondary-container": "#646464",
+                    "outline": "#717a68",
+                    "surface-bright": "#fbf9f8",
+                    "on-primary-fixed": "#092100",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#efeded",
+                    "inverse-primary": "#8bda5c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#ffffff]/80 dark:bg-zinc-950/80 backdrop-blur-xl shadow-[0_10px_30px_rgba(27,28,28,0.06)] dark:shadow-none h-20">
+<div class="flex justify-between items-center px-8 h-full w-full max-w-[1920px] mx-auto">
+<!-- Brand Logo -->
+<div class="text-xl font-bold tracking-tighter text-zinc-900 dark:text-white">
+                ECO LOCAUX
+            </div>
+<!-- Navigation Links -->
+<div class="hidden md:flex items-center space-x-10"><a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors" href="#">Recherche ciblée</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors" href="#">Liste nouveaux contacts</a>
+<a class="text-zinc-900 dark:text-white border-b-2 border-[#72BF44] pb-1 font-bold" href="#">Rédaction email</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors" href="#">Consulter une fiche</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors" href="#">Tableau de suivi</a>
+<a class="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors" href="#">Agenda</a></div>
+<!-- Trailing Actions -->
+<div class="flex items-center space-x-4"><div class="flex items-center space-x-3 cursor-pointer group"><div class="flex flex-col items-end">
+<span class="text-sm font-bold text-zinc-900 dark:text-white">Sébastien Morel</span>
+</div>
+<div class="relative">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors">
+<img alt="Sébastien Morel" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJsoPCRFS0w-zcRAbrAHZ04JgUZINlTGlvZoG3HG6EgBMQQkM46LO4E-UTli1dizX0q5WIRnaun3F2ETvT8wI1JjChsQj8BcJCzKxgyQ4Za8HmpLMeuc9S7m5Dlpgd3d_UOEMAec9KvEMq16ZZdSbn6UDxzibhiq7rVkhv_SDMF8a1zA47xt-WuiuRqauoPI3_k-q0MldAAf2j8PC7fQsGWiwqSB_5pXApoMzfOv8jOW4zPsmL14Y2KCWMh8EwBFE09um-jkSiS8CO"/>
+</div>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-primary border-2 border-white dark:border-zinc-950 rounded-full"></div>
+</div></div></div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-32 pb-24 px-6 sm:px-12">
+<div class="max-w-4xl mx-auto">
+<!-- Hero Header - Editorial Style -->
+<header class="mb-16">
+<div class="flex items-center space-x-3 mb-4">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-primary font-bold tracking-widest text-xs uppercase">Assistant Intelligence Artificielle</span>
+</div>
+<h1 class="text-5xl font-bold tracking-tight text-on-surface mb-6">Rédaction de proposition</h1>
+<p class="text-secondary text-lg max-w-2xl leading-relaxed">Générez des communications précises basées sur les données énergétiques du prospect. L'IA adapte le ton selon le secteur d'activité pour maximiser l'engagement.</p>
+</header>
+<!-- Prospect Context Section (Bento Style) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="md:col-span-2 p-8 bg-surface-container-lowest rounded-xl shadow-[0_10px_30px_rgba(27,28,28,0.04)]">
+<div class="flex items-start justify-between mb-8">
+<div>
+<p class="text-xs font-bold text-tertiary-container uppercase tracking-wider mb-1">Société</p>
+<h2 class="text-2xl font-bold text-on-surface">Boulangerie "Le Pain de Demain"</h2>
+</div>
+<div class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold rounded-full uppercase tracking-tighter">
+                            Haut Potentiel
+                        </div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<p class="text-xs font-medium text-secondary mb-1">Contact Principal</p>
+<p class="text-on-surface font-semibold">Jean-Luc Martinez</p>
+<p class="text-sm text-secondary">Gérant Propriétaire</p>
+</div>
+<div>
+<p class="text-xs font-medium text-secondary mb-1">Secteur</p>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary text-sm">bakery_dining</span>
+<p class="text-on-surface font-semibold">Boulangerie &amp; Pâtisserie</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary/5 p-8 rounded-xl flex flex-col justify-between border-l-4 border-primary">
+<div>
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-4">Focus Énergétique</p>
+<p class="text-on-surface font-medium leading-relaxed">Consommation identifiée : <span class="font-bold">Fours électriques industriels</span>. Potentiel d'économie estimé à <span class="text-primary font-bold">22% par an</span>.</p>
+</div>
+<div class="mt-4">
+<img class="w-full h-24 object-cover rounded-lg opacity-80 mix-blend-multiply" data-alt="high-end artisanal bakery interior with warm lighting and rustic bread display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpQKjMMQMop-SvGsMzXxon8juSseRdVY1R2MWxXFxcMeptVpdhK-0gVhGliMK-u7G8pACiuiH1bWqyGZRwiU60m1qcvDP9fNvUowC6-GDdysnXTfOO_jZmcTB_5cBjA__yIzForlNOdEa4MHGHmGSDdjG9t1kRj0196Hsey9CSkensSr3KiiyS7nNOCIO_baiTetI8DA_5NBDsOa0uVFue2NhYfJcRmBJUgrcEfq-wmNL3VEisFgiJEr8SnKhRJGa2PfYZHfUqTnN9"/>
+</div>
+</div>
+</section>
+<!-- Email Drafting Area -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0_10px_30px_rgba(27,28,28,0.04)] overflow-hidden">
+<!-- Editor Header -->
+<div class="px-8 py-6 bg-surface-container-low flex items-center justify-between border-b border-outline-variant/10">
+<div class="flex items-center space-x-4 w-full">
+<span class="text-xs font-bold text-secondary uppercase tracking-widest">Objet :</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface font-semibold w-full text-lg p-0" type="text" value="Optimisation énergétique et réduction de charges pour votre boulangerie"/>
+</div>
+</div>
+<!-- Editor Body -->
+<div class="p-8">
+<div class="prose prose-zinc max-w-none text-on-surface-variant leading-loose font-body">
+<p>Bonjour Monsieur Martinez,</p>
+<p>Je me permets de vous contacter suite à l'analyse préliminaire des équipements énergétiques de votre établissement, <strong>Le Pain de Demain</strong>. </p>
+<p>Nos données indiquent qu'une optimisation de vos cycles de cuisson, couplée à une renégociation stratégique de vos contrats de fourniture, pourrait réduire votre facture d'électricité annuelle de plus de <strong>12 500 €</strong>. Dans le contexte actuel de volatilité des prix de l'énergie, cette marge de manœuvre est cruciale pour la pérennité de votre activité artisanale.</p>
+<p>ECO LOCAUX accompagne déjà plusieurs confrères dans votre département. Je souhaiterais vous proposer un audit gratuit de 15 minutes le mardi prochain pour vous présenter nos leviers d'action concrets.</p>
+<p>Dans l'attente de votre retour, je vous prie d'agréer, Monsieur Martinez, l'expression de mes salutations distinguées.</p>
+<div class="mt-12 pt-8 border-t border-outline-variant/10">
+<p class="font-bold text-on-surface">Marc-Antoine Lefebvre</p>
+<p class="text-sm text-secondary">Expert Efficacité Énergétique — ECO LOCAUX</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Buttons Footer -->
+<footer class="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+<div class="flex items-center space-x-2 text-secondary text-sm">
+<span class="material-symbols-outlined text-sm">history</span>
+<span>Dernière modification : il y a 2 minutes</span>
+</div>
+<div class="flex items-center space-x-4 w-full sm:w-auto">
+<!-- Modifier -->
+<button class="flex-1 sm:flex-none px-8 py-3 rounded-lg border border-outline-variant/30 text-on-surface font-bold text-sm hover:bg-zinc-50 transition-all uppercase tracking-widest">
+                        Modifier
+                    </button>
+<!-- Valider -->
+<button class="flex-1 sm:flex-none px-8 py-3 rounded-lg border-2 border-primary-container text-primary font-bold text-sm hover:bg-primary-container/10 transition-all uppercase tracking-widest">
+                        Valider le message
+                    </button>
+<!-- Envoyer -->
+<button class="flex-1 sm:flex-none px-10 py-4 rounded-lg bg-gradient-to-br from-primary to-primary-container text-white font-bold text-sm shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all uppercase tracking-widest flex items-center justify-center space-x-2">
+<span>Envoyer</span>
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</footer>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="w-full py-12 border-t border-zinc-200/20 bg-zinc-50 dark:bg-zinc-900 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 w-full max-w-[1920px] mx-auto">
+<p class="text-xs font-medium tracking-wide Inter uppercase text-zinc-400 dark:text-zinc-500">
+                © 2024 ECO LOCAUX. The Precision Architect.
+            </p>
+<div class="flex space-x-8 mt-6 md:mt-0">
+<a class="text-xs font-medium tracking-wide Inter uppercase text-zinc-400 dark:text-zinc-500 hover:text-[#72BF44] transition-colors" href="#">Mentions Légales</a>
+<a class="text-xs font-medium tracking-wide Inter uppercase text-zinc-400 dark:text-zinc-500 hover:text-[#72BF44] transition-colors" href="#">Contact</a>
+<a class="text-xs font-medium tracking-wide Inter uppercase text-zinc-400 dark:text-zinc-500 hover:text-[#72BF44] transition-colors" href="#">Confidentialité</a>
+</div>
+</div>
+</footer>
+</body></html>

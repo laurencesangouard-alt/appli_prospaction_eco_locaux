@@ -1,0 +1,244 @@
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#6BA43A",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#1b1c1c",
+                    "tertiary": "#536500",
+                    "primary": "#6BA43A",
+                    "on-secondary-container": "#646464",
+                    "on-tertiary-fixed": "#171e00",
+                    "surface-container": "#efeded",
+                    "primary-fixed": "#a6f875",
+                    "surface": "#fbf9f8",
+                    "inverse-on-surface": "#f2f0f0",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#1d4a00",
+                    "tertiary-container": "#99b800",
+                    "surface-container-highest": "#e4e2e2",
+                    "on-tertiary-fixed-variant": "#3e4c00",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#215100",
+                    "inverse-surface": "#303031",
+                    "primary-fixed-dim": "#8bda5c",
+                    "on-primary-fixed": "#092100",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e9e8e7",
+                    "outline": "#717a68",
+                    "surface-bright": "#fbf9f8",
+                    "tertiary-fixed-dim": "#b1d500",
+                    "secondary-container": "#e2e2e2",
+                    "primary-container": "#72bf44",
+                    "on-surface-variant": "#414939",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "tertiary-fixed": "#caf200",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f5f3f3",
+                    "on-error": "#ffffff",
+                    "outline-variant": "#c0cab5",
+                    "surface-dim": "#dbdad9",
+                    "background": "#fbf9f8",
+                    "on-secondary-fixed-variant": "#474747",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#8bda5c",
+                    "secondary-fixed": "#e2e2e2",
+                    "on-tertiary-container": "#384500",
+                    "on-secondary-fixed": "#1b1b1b",
+                    "secondary": "#5e5e5e",
+                    "surface-variant": "#e4e2e2",
+                    "on-surface": "#1b1c1c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+        .inner-highlight { box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.2); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen overflow-x-hidden">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 w-full z-50 glass-nav shadow-[0_10px_30px_rgba(27,28,28,0.06)]">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-full">
+<div class="flex items-center gap-4">
+<img alt="ECO LOCAUX Logo" class="h-10 w-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlj-cWrQpcilrkLLABfDOUb4b1t0gbeOxI66Ni4pF00fML0eRVTVoROCFa01n3Bb8rWTYb9eJXjsuIPpxqiKUuTtJSymebEjt4ETRAzMHP-41o1SZyM-gYGuYctzHWQ2n4Zddsh410Frm7l7FNNI4JxIqBxorM16mLH33ETVV29wxCZ1FSDApAd7hwWRLlXAH9qQqJwBsHHtSpl2oR3NqaG8cAZ2QrABkOV7e6DcBU9b1DJgJe2jgvzN_6PXHCeccR7jluOhYXw8Ow"/>
+<span class="text-xl font-black text-stone-900 uppercase tracking-tighter font-headline">ECO LOCAUX</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-primary border-b-2 border-primary font-headline font-bold text-base tracking-tight px-1 py-1" href="#">Recherche ciblée</a>
+<a class="text-stone-500 hover:text-primary transition-colors duration-300 font-headline font-bold text-base tracking-tight" href="#">Liste nouveaux contacts</a>
+<a class="text-stone-500 hover:text-primary transition-colors duration-300 font-headline font-bold text-base tracking-tight" href="#">Rédaction email</a>
+<a class="text-stone-500 hover:text-primary transition-colors duration-300 font-headline font-bold text-base tracking-tight" href="#">Consulter une fiche</a>
+<a class="text-stone-500 hover:text-primary transition-colors duration-300 font-headline font-bold text-base tracking-tight" href="#">Tableau de suivi</a>
+<a class="text-stone-500 hover:text-primary transition-colors duration-300 font-headline font-bold text-base tracking-tight" href="#">Agenda</a>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-3 cursor-pointer group"><p class="text-sm font-bold text-stone-900 leading-none">Sébastien Morel</p>
+<div class="relative">
+<img alt="Sébastien Morel" class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm group-hover:border-primary/20 transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJVDDx0HRXPoUb74oAFcqRAs5OYBBsLTSj1W0YLZ4sdbVWeJiNhxSPPmgbq1N6uJsUpFiE3Q6WS2iICVj4sOcqdQlgaHJ6YLdJ-WqKQS_xL8qu817Di2dWqXsMkDGZKN1Z5HEdScEcHpUx1MmpYM9WXlYKDIncHYznsUEcN0xPOK2Gjizg9Tsocjhm8BPQDO3f77p2kxQ5OAEljNc5MZxXGnbD-7XTnpZ-VOiKgC76aDcoph7I7_lPFj0l4mgQLLnKhrzKNnlOxs7Z"/>
+<div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-stone-400 font-bold">expand_more</span>
+</div>
+</div></div>
+</div>
+</nav>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-28 pb-12 overflow-x-hidden">
+<div class="max-w-7xl mx-auto px-6 md:px-10 lg:px-12 w-full">
+<!-- Hero Header Section -->
+<section class="mb-16 text-center">
+<h1 class="text-4xl md:text-6xl font-headline font-bold tracking-tighter text-on-background mb-4">
+                    Optimisation commerciale
+                </h1>
+<p class="text-stone-500 max-w-2xl mx-auto font-medium text-lg">
+                    Identifiez les entreprises locales à fort potentiel d'optimisation énergétique. Filtrez par secteur et localisation pour débuter votre prospection.
+                </p>
+</section>
+<!-- Centered & Prominent Search Section -->
+<section class="mb-20">
+<div class="max-w-5xl mx-auto bg-surface-container-lowest rounded-[2.5rem] p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-stone-100 flex flex-col items-center">
+<div class="w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+<div class="md:col-span-5 w-full">
+<label class="block text-xs font-bold text-stone-400 uppercase tracking-widest mb-4 px-1">Secteur d'activité</label>
+<div class="relative">
+<select class="w-full bg-surface-container-low border-2 border-transparent focus:border-primary/20 focus:bg-white rounded-2xl px-6 py-5 text-lg font-medium appearance-none transition-all duration-300">
+<option value="">Type de commerce</option>
+<option>Boulangerie</option>
+<option>Boucherie</option>
+<option>Restaurant</option>
+<option>Pizzeria</option>
+<option>Laverie</option>
+<option>Pressing</option>
+</select>
+<span class="material-symbols-outlined absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-stone-400 text-2xl">expand_more</span>
+</div>
+</div>
+<div class="md:col-span-4 w-full">
+<label class="block text-xs font-bold text-stone-400 uppercase tracking-widest mb-4 px-1">Localisation</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-2 border-transparent focus:border-primary/20 focus:bg-white rounded-2xl px-6 py-5 text-lg font-medium transition-all duration-300" placeholder="Ville" type="text"/>
+<span class="material-symbols-outlined absolute right-6 top-1/2 -translate-y-1/2 text-stone-400 text-2xl">location_on</span>
+</div>
+</div>
+<div class="md:col-span-3 w-full">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white px-8 py-5 rounded-2xl font-headline font-bold text-lg flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-[0.98] duration-200">
+<span class="material-symbols-outlined text-2xl">search</span>
+                                Rechercher
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Grid (High-End Layout) -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="bg-surface-container-low p-8 rounded-xl border-l-4 border-lime-600/20">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-lime-700 bg-lime-100 p-2 rounded-lg" data-icon="groups">groups</span>
+<span class="text-[10px] font-bold text-lime-600 bg-lime-100/50 px-2 py-0.5 rounded-full">+12%</span>
+</div>
+<p class="text-stone-500 text-sm font-medium mb-1">Total contacts</p>
+<h4 class="text-4xl font-headline font-bold text-stone-900">1,482</h4>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl border-l-4 border-stone-300">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-stone-600 bg-stone-200 p-2 rounded-lg" data-icon="alternate_email">alternate_email</span>
+</div>
+<p class="text-stone-500 text-sm font-medium mb-1">Emails envoyés</p>
+<h4 class="text-4xl font-headline font-bold text-stone-900">458</h4>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl border-l-4 border-tertiary-container/40">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-tertiary bg-tertiary-fixed p-2 rounded-lg" data-icon="schedule">schedule</span>
+</div>
+<p class="text-stone-500 text-sm font-medium mb-1">Rendez-vous à venir</p>
+<h4 class="text-4xl font-headline font-bold text-stone-900">24</h4>
+</div>
+</section>
+<!-- Content Area: Sector Cards Grid -->
+<section class="bg-transparent mb-12">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Boulangerie -->
+<div class="group relative overflow-hidden rounded-2xl bg-surface-container-low border border-stone-100 transition-all duration-300 hover:shadow-xl hover:shadow-stone-200/50">
+<div class="aspect-[4/3] w-full overflow-hidden">
+<img alt="Boulangerie" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJqFX4ESZ50jBcsnf8neRP0M3vMY5FaIewzBC8XNSi0vb9viteR7BPmfUBOm3p_EUlzMJ8-5-bgkL0_OObIO5XTTbLxrq156_7xJ8Mxq72Ji_4njrPPJm36Wbthy6C5zAbZLfQk7LqCypNB8vE2_U0WgT-7qvNSJnjWtrVo5gzDW15KMRkIvDxiAZ-8uuS9KnqLJ-DLVOAWZ7lgjXW1qcK1VYiym3L-mmtBw3FJ-Dvlk6An8k-crSycnvIhJ5UkkRwwLZ2UDjychdf"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
+<h3 class="text-white font-headline font-bold text-2xl tracking-tight">Boulangerie</h3>
+</div>
+</div>
+<!-- Boucherie -->
+<div class="group relative overflow-hidden rounded-2xl bg-surface-container-low border border-stone-100 transition-all duration-300 hover:shadow-xl hover:shadow-stone-200/50">
+<div class="aspect-[4/3] w-full overflow-hidden">
+<img alt="Boucherie" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgmXOdxDi55X_2cPPrjY4oOypZqDXdlhSRruqWWWyJgV7D4pFHoVQ12RYhDSntQBetFzhQL9kNRCC0DbwrI8BYwwsNM3zmYxtfoQmNtLfPXjAV9GQxjZFwHtyYxnwyJc7DlvCHE7GYb0cL3TLYTvT7ldbssGqykbYh1P0Qki5kIKGgnoNliR3tKmZy7FB2UjLygE0oiHD4GlHfeKMKOlZtVyBeRm1ty7zKHAPCDF-aEXqKzFD5eV8r-E5nVAWqKx7rWsvZfHCus05P"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
+<h3 class="text-white font-headline font-bold text-2xl tracking-tight">Boucherie</h3>
+</div>
+</div>
+<!-- Restaurant -->
+<div class="group relative overflow-hidden rounded-2xl bg-surface-container-low border border-stone-100 transition-all duration-300 hover:shadow-xl hover:shadow-stone-200/50">
+<div class="aspect-[4/3] w-full overflow-hidden">
+<img alt="Restaurant" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6mw3hB0UkkcYgD_bzvxFm0jefTMv4hAGVhgMo3zlVqpxOikpNKVuDBCZ6S0AKRSQVg1j71nH50XG0KcZTK7pjHBQcftzwsuLI2xmM8u8gcTBqZU-ePogjK-LYgi8vVz2tC6RSi8z8qdn-5uMiPNwP7XnMTo9bpOAWnv3UDql8y8xyWe9i7JpCWqbER0LLrCnGqQgawamXFK4JyIb3y6zMTN2IXKHaP2y8IyFGmsIsVE8JlwX80L7gh8v7QFxoVqjcsgRdB2cf9L-m"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
+<h3 class="text-white font-headline font-bold text-2xl tracking-tight">Restaurant</h3>
+</div>
+</div>
+<!-- Pizzeria -->
+<div class="group relative overflow-hidden rounded-2xl bg-surface-container-low border border-stone-100 transition-all duration-300 hover:shadow-xl hover:shadow-stone-200/50">
+<div class="aspect-[4/3] w-full overflow-hidden">
+<img alt="Pizzeria" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/ADBb0uhsbfoiXlxMJCDLsuvd6xFXz8Y9mQOuVyoR4VbrH9dsFrEjur3U-g2qTNoBb8JLX7mkN6HmBCqPG-RJdhmkH5HOHdH93cvgQ64rBM82qcyn6oHwqRq48o5fmV6RSgaqQ2OuV_dDhnOPMWiy51e9igvNGeSyDpoGVAC47iGmZ8hcB8V9Sg3PE45ONNZvToeDPxCQlDMfiduw1go9p5IZs3VWfUaAPuQ5IXy483-PWNE4bQ9vYsmvZmo0o-pI"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
+<h3 class="text-white font-headline font-bold text-2xl tracking-tight">Pizzeria</h3>
+</div>
+</div>
+<!-- Laverie -->
+<div class="group relative overflow-hidden rounded-2xl bg-surface-container-low border border-stone-100 transition-all duration-300 hover:shadow-xl hover:shadow-stone-200/50">
+<div class="aspect-[4/3] w-full overflow-hidden">
+<img alt="Laverie" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/ADBb0uicq1P_E-IYwP8FMKbYZP7tjr6QV51R7nV0LTaOmV1z96TGrQ_PHT1yVFDQ7oaRj4bp6aUmbjKWgBEunoiGnLM1lDHz2Ae7qJ57udjbo6SKOR9gIT9C8ThVupw_0qRQIHB8vOyvYb4CeIW7j650lgGSUlbvUkget_trL0YcCTa8702LLE1_GdVxLZmAJCxgqJcCFPVx6C2Ul3vbE6GSuV1YChcnAmzDUo-o6M4SQF699toaxCP-yA9IBoX5"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
+<h3 class="text-white font-headline font-bold text-2xl tracking-tight">Laverie</h3>
+</div>
+</div>
+<!-- Pressing -->
+<div class="group relative overflow-hidden rounded-2xl bg-surface-container-low border border-stone-100 transition-all duration-300 hover:shadow-xl hover:shadow-stone-200/50">
+<div class="aspect-[4/3] w-full overflow-hidden">
+<img alt="Pressing" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/ADBb0ujEm2-h8LCBXkFC0ERHxOCv8LdjRxOm1DUNCUVWuBjUsmHmib8k_SSKGwwIkXENYN77XvwY3XPcU3nV7h9-Cid9i7XwCGC8mF3z31Tj8Upq0Ek7_i092vYrPIXszOZbzc3RPLcMVgmeEDQ3p5HeD696TstCcmsf4NOFI41fnMeMI8gkLTalffS4SQtVbJon_gi7xFS0JVI45Ulx1__Crgi_u3QGe8Av8zUXmmu8oijEQaCljhrrCxJ_GaE"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
+<h3 class="text-white font-headline font-bold text-2xl tracking-tight">Pressing</h3>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

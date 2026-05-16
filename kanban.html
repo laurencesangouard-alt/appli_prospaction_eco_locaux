@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProspAction – Pipeline Kanban | Eco Locaux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/pipeline.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <nav class="topnav glass-nav" id="topnav">
+    <div class="topnav-inner">
+      <a href="optimisation.html" class="nav-brand">
+        <div class="brand-icon-sm">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="none">
+            <path d="M16 2L4 8v8c0 7.73 5.14 14.96 12 16.93C22.86 30.96 28 23.73 28 16V8L16 2z" fill="url(#spn)"/>
+            <path d="M11 16l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="spn" x1="4" y1="2" x2="28" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#6BA43A"/><stop offset="1" stop-color="#72bf44"/></linearGradient></defs>
+          </svg>
+        </div>
+        <span class="nav-brand-name">ProspAction</span>
+      </a>
+      <div class="nav-links">
+        <a href="optimisation.html" class="nav-link">Recherche</a>
+        <a href="contacts.html" class="nav-link">Contacts</a>
+        <a href="email-assistant.html" class="nav-link">Email IA</a>
+        <a href="kanban.html" class="nav-link active">Pipeline</a>
+        <a href="agenda.html" class="nav-link">Agenda</a>
+      </div>
+      <div class="nav-user">
+        <div class="user-pill">
+          <div class="user-avatar" id="user-avatar">—</div>
+          <span class="user-name" id="user-name">…</span>
+        </div>
+        <button class="btn-icon" id="logout-btn" title="Se déconnecter">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 11l3-3-3-3M13 8H6M6 3H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pipeline-layout">
+    <div class="pipeline-header">
+      <div>
+        <h1 class="section-title">Pipeline commercial</h1>
+        <p class="section-subtitle">Glissez-déposez les cartes pour mettre à jour le statut</p>
+      </div>
+      <div class="pipeline-stats" id="pipeline-stats">
+        <div class="stat-chip">
+          <span class="stat-val" id="stat-total">—</span>
+          <span class="stat-lbl">Total prospects</span>
+        </div>
+        <div class="stat-chip stat-chip-green">
+          <span class="stat-val" id="stat-clients">—</span>
+          <span class="stat-lbl">Clients</span>
+        </div>
+        <div class="stat-chip stat-chip-amber">
+          <span class="stat-val" id="stat-rdv">—</span>
+          <span class="stat-lbl">RDV planifiés</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex-1 flex gap-8 min-h-0 overflow-hidden" style="display: flex !important; flex-direction: row !important;">
+      <!-- Board Area -->
+      <div id="kanban-board" class="kanban-board flex-1 min-w-0 h-full">
+        <!-- Colonnes injectées par JS -->
+      </div>
+
+      <!-- Overdue Sidebar -->
+      <aside id="overdue-section" class="shrink-0 overflow-y-auto pb-8" style="width: 350px !important; display: block !important;">
+        <div class="bg-red-50 border border-red-200 rounded-3xl p-6 h-fit shadow-lg">
+          <h3 class="font-bold text-xs flex items-center gap-2 text-red-700 uppercase tracking-widest mb-5">
+            <span class="material-symbols-outlined">warning</span>Relances en retard
+          </h3>
+          <div id="overdue-list" class="flex flex-col gap-4">
+            <!-- JS -->
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Modal détail contact -->
+  <div class="modal-overlay hidden" id="contact-modal-overlay">
+    <div class="modal glass-card wide-modal" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title" id="contact-modal-name">—</h2>
+          <p class="modal-subtitle" id="contact-modal-activity">—</p>
+        </div>
+        <button class="btn-icon modal-close" id="contact-modal-close" aria-label="Fermer">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="contact-detail-grid">
+          <div class="detail-row">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5a4.5 4.5 0 0 1 4.5 4.5c0 3.5-4.5 8.5-4.5 8.5S3.5 9.5 3.5 6A4.5 4.5 0 0 1 8 1.5z" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span id="detail-address">—</span>
+          </div>
+          <div class="detail-row">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 3h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5"/><path d="M2 5l6 4 6-4" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span id="detail-email">—</span>
+          </div>
+          <div class="detail-row">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 2h2.5l1 3-1.5 1.5a9 9 0 0 0 4.5 4.5L11 9.5l3 1V13a1 1 0 0 1-1 1A11 11 0 0 1 2 3a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span id="detail-phone">—</span>
+          </div>
+          <div class="detail-row">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 12L14 2M14 2H9M14 2v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <a id="detail-website" href="#" target="_blank" rel="noopener">—</a>
+          </div>
+          <div class="detail-row">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.8 3.6 4 .6-2.9 2.8.7 4L8 10l-3.6 1.9.7-4L2.1 5.2l4-.6L8 1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            <span id="detail-rating">—</span>
+          </div>
+          <div class="detail-row">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5 1.5v3M11 1.5v3M2 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span id="detail-relance">—</span>
+          </div>
+        </div>
+
+        <div class="detail-status-row">
+          <div style="display:flex; flex-direction:column; gap:0.5rem; width:100%">
+            <label class="field-label">Changer le statut & Date de relance</label>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <select id="detail-status-select" class="field-input field-select compact" style="flex:1">
+                <option value="nouveau_lead">Nouveau lead</option>
+                <option value="email_envoye">Email envoyé</option>
+                <option value="a_relancer">À relancer</option>
+                <option value="rdv_planifie">RDV planifié</option>
+                <option value="en_attente">En attente</option>
+              </select>
+              <input type="date" id="detail-relance-input" class="field-input compact" style="width:150px" />
+              <button class="btn btn-primary" id="detail-update-status-btn">Mettre à jour</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="optimisation.html" class="btn btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Retour recherche
+        </a>
+        <button class="btn btn-secondary" id="detail-email-btn">Générer email IA</button>
+        <button class="btn btn-primary" id="detail-rdv-btn">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M5 1.5v3M11 1.5v3M2 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Planifier RDV
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal RDV -->
+  <div class="modal-overlay hidden" id="rdv-modal-overlay">
+    <div class="modal glass-card" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">Planifier un RDV</h2>
+          <p class="modal-subtitle" id="rdv-contact-name">—</p>
+        </div>
+        <button class="btn-icon modal-close" id="rdv-modal-close" aria-label="Fermer">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="field-group">
+          <label for="rdv-date" class="field-label">Date du RDV</label>
+          <input type="date" id="rdv-date" class="field-input" required />
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="field-group">
+            <label for="rdv-time" class="field-label">Heure Début</label>
+            <input type="time" id="rdv-time" class="field-input" required />
+          </div>
+          <div class="field-group">
+            <label for="rdv-time-end" class="field-label">Heure Fin</label>
+            <input type="time" id="rdv-time-end" class="field-input" required />
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="rdv-location" class="field-label">Lieu / Lien Visio</label>
+          <input type="text" id="rdv-location" class="field-input" placeholder="Bureau, adresse ou Google Meet..." />
+        </div>
+        <div class="field-group">
+          <label for="rdv-commercial" class="field-label">ID Commercial (Google Calendar)</label>
+          <input type="text" id="rdv-commercial" class="field-input" value="lsangouard@gmail.com" />
+        </div>
+        <div class="field-group">
+          <label for="rdv-note" class="field-label">Note interne (optionnel)</label>
+          <textarea id="rdv-note" class="field-input field-textarea" rows="2" placeholder="Contexte..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="rdv-cancel-btn">Annuler</button>
+        <button class="btn btn-primary" id="rdv-confirm-btn">Confirmer le RDV</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Email IA (pipeline) -->
+  <div class="modal-overlay hidden" id="email-modal-overlay">
+    <div class="modal glass-card" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title">Email IA</h2>
+          <p class="modal-subtitle" id="email-contact-name">—</p>
+        </div>
+        <button class="btn-icon modal-close" id="email-modal-close" aria-label="Fermer">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M14 4L4 14M4 4l10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="email-generate-step">
+          <p class="modal-hint">Email personnalisé généré par IA.</p>
+          <button class="btn btn-primary btn-full" id="generate-email-btn">
+            <span id="generate-email-btn-text">Générer l'email</span>
+            <svg id="generate-spinner" class="spinner hidden" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" stroke-dasharray="28" stroke-dashoffset="14" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div id="email-editor-step" class="hidden">
+          <div class="field-group">
+            <label for="email-subject" class="field-label">Objet</label>
+            <input type="text" id="email-subject" class="field-input" />
+          </div>
+          <div class="field-group">
+            <label for="email-body" class="field-label">Corps</label>
+            <textarea id="email-body" class="field-input field-textarea" rows="10"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer hidden" id="email-modal-footer">
+        <button class="btn btn-secondary" id="regenerate-btn">Régénérer</button>
+        <button class="btn btn-primary" id="validate-send-btn">
+          <span id="send-btn-text">Valider &amp; Envoyer</span>
+          <svg id="send-spinner" class="spinner hidden" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" stroke-dasharray="28" stroke-dashoffset="14" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/pipeline.js"></script>
+</body>
+</html>

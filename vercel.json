@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/proxy-n8n", "destination": "/api/proxy-n8n" }
+  ]
+}

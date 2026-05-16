@@ -1,0 +1,14 @@
+{
+  "name": "prospaction-eco-locaux",
+  "version": "1.0.0",
+  "description": "Commercial prospecting application for Eco-Locaux",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
