@@ -339,6 +339,13 @@ document.getElementById('status-filter').addEventListener('change', function() {
 document.getElementById('refresh-btn').addEventListener('click', () => loadContacts(document.getElementById('status-filter').value));
 document.getElementById('search-input').addEventListener('input', () => renderContacts(filterSearch(allContacts)));
 
-document.addEventListener('DOMContentLoaded', () => { loadContacts(); });
+document.addEventListener('DOMContentLoaded', async () => { 
+  const urlParams = new URLSearchParams(window.location.search);
+  const statusParam = urlParams.get('status') || 'tous';
+  if (statusParam !== 'tous') {
+    document.getElementById('status-filter').value = statusParam;
+  }
+  loadContacts(statusParam); 
+});
 </script>
 </body></html>

@@ -50,19 +50,19 @@
         <p class="section-subtitle">Glissez-déposez les cartes pour mettre à jour le statut</p>
       </div>
       <div class="pipeline-stats" id="pipeline-stats">
-        <div class="stat-chip">
+        <div class="stat-chip cursor-pointer hover:bg-stone-50 transition-colors" onclick="window.location.href='contacts.html?status=tous'">
           <span class="stat-val" id="stat-total">—</span>
           <span class="stat-lbl">Total prospects</span>
         </div>
-        <div class="stat-chip stat-chip-green">
+        <div class="stat-chip stat-chip-green cursor-pointer hover:opacity-80 transition-opacity" onclick="window.location.href='contacts.html?status=client'">
           <span class="stat-val" id="stat-clients">—</span>
           <span class="stat-lbl">Clients</span>
         </div>
-        <div class="stat-chip stat-chip-amber">
+        <div class="stat-chip stat-chip-amber cursor-pointer hover:opacity-80 transition-opacity" onclick="window.location.href='contacts.html?status=rdv_planifie'">
           <span class="stat-val" id="stat-rdv">—</span>
           <span class="stat-lbl">RDV planifiés</span>
         </div>
-        <div class="stat-chip">
+        <div class="stat-chip cursor-pointer hover:bg-stone-50 transition-colors" onclick="window.location.href='contacts.html?status=en_attente'">
           <span class="stat-val" id="stat-attente">—</span>
           <span class="stat-lbl">En attente</span>
         </div>
