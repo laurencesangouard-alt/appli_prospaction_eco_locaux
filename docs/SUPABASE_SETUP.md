@@ -55,7 +55,8 @@ CREATE TABLE IF NOT EXISTS public.contacts (
   user_id       uuid REFERENCES auth.users(id) ON DELETE SET NULL,
   CONSTRAINT contacts_statut_check CHECK (statut IN (
     'nouveau_lead', 'email_envoye', 'a_relancer',
-    'rdv_planifie', 'client', 'en_attente', 'perdu'
+    'rdv_planifie', 'client', 'en_attente', 'perdu',
+    'ne_pas_relancer'
   ))
 );
 
